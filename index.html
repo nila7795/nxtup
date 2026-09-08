@@ -26,6 +26,7 @@
     <div class="topActions">
       <button id="language" class="textIconBtn" type="button" aria-label="Sprache wechseln">DE</button>
       <button id="theme" class="iconBtn" type="button" aria-label="Hell-/Dunkelmodus">◐</button>
+      <button id="accountBtn" class="accountBtn" type="button" aria-label="Anmelden oder Profil erstellen"><span>○</span><b>Anmelden</b><small>Profil erstellen</small></button>
       <button id="privacyBtnTop" class="iconBtn" type="button" aria-label="Datenschutzeinstellungen">⚙</button>
     </div>
   </header>
@@ -35,7 +36,7 @@
       <div class="heroGlow heroGlowA"></div><div class="heroGlow heroGlowB"></div>
       <div class="heroCopy">
         <p class="eyebrow" id="heroLocation">KARLSRUHE · 50 KM</p>
-        <h1>Find what’s <span>next.</span></h1>
+        <button id="heroDiscover" class="heroDiscover" type="button" aria-label="Quick Discover öffnen"><span class="heroTitle">Find what’s <span>next.</span></span><em>Entdecken →</em></button>
         <p class="heroText">Events in ganz Europa entdecken — von Techno bis Theater, von Street Food bis Stadtfest.</p>
         <div class="heroActions">
           <button id="now" class="primaryAction" type="button"><span class="bolt">↗</span><span><small>Spontan los?</small><strong>Was geht jetzt?</strong></span></button>
@@ -160,7 +161,7 @@
   <footer class="footer">
     <div><strong>NXTUP</strong><span>Find what's next.</span></div>
     <nav><button id="privacyLink" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieLink" type="button">Cookie-/Datenschutz-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button></nav>
-    <small>Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
+    <small><b class="versionBadge">NXTUP v5</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
   </footer>
 
   <dialog id="eventModal" class="modal"><button class="close" id="closeModal" type="button" aria-label="Schließen">×</button><div id="modalBody"></div></dialog>

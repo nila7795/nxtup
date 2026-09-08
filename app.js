@@ -6,6 +6,9 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const toISO = d => new Date(d).toISOString().slice(0,10);
 const futureDate = days => toISO(new Date(APP_DATE.getTime()+days*DAY));
+const slotFromNow = hours => {const d=new Date(APP_DATE.getTime()+hours*3600000);return {date:toISO(d),time:d.toTimeString().slice(0,5)}};
+const cityHash = s => [...String(s)].reduce((a,c)=>((a*31+c.charCodeAt(0))>>>0),2166136261);
+
 
 const cities = [
   {name:'Karlsruhe',country:'Deutschland',lat:49.0069,lng:8.4037},
@@ -23,7 +26,35 @@ const cities = [
   {name:'Wien',country:'Österreich',lat:48.2082,lng:16.3738},
   {name:'Prag',country:'Tschechien',lat:50.0755,lng:14.4378},
   {name:'Mailand',country:'Italien',lat:45.4642,lng:9.19},
-  {name:'Ibiza',country:'Spanien',lat:38.9067,lng:1.4206}
+  {name:'Ibiza',country:'Spanien',lat:38.9067,lng:1.4206},
+  {name:'Rom',country:'Italien',lat:41.9028,lng:12.4964},
+  {name:'Lissabon',country:'Portugal',lat:38.7223,lng:-9.1393},
+  {name:'Porto',country:'Portugal',lat:41.1579,lng:-8.6291},
+  {name:'Brüssel',country:'Belgien',lat:50.8503,lng:4.3517},
+  {name:'Kopenhagen',country:'Dänemark',lat:55.6761,lng:12.5683},
+  {name:'Stockholm',country:'Schweden',lat:59.3293,lng:18.0686},
+  {name:'Oslo',country:'Norwegen',lat:59.9139,lng:10.7522},
+  {name:'Helsinki',country:'Finnland',lat:60.1699,lng:24.9384},
+  {name:'Warschau',country:'Polen',lat:52.2297,lng:21.0122},
+  {name:'Budapest',country:'Ungarn',lat:47.4979,lng:19.0402},
+  {name:'Dublin',country:'Irland',lat:53.3498,lng:-6.2603},
+  {name:'Zürich',country:'Schweiz',lat:47.3769,lng:8.5417},
+  {name:'Genf',country:'Schweiz',lat:46.2044,lng:6.1432},
+  {name:'Athen',country:'Griechenland',lat:37.9838,lng:23.7275},
+  {name:'Zagreb',country:'Kroatien',lat:45.815,lng:15.9819},
+  {name:'Ljubljana',country:'Slowenien',lat:46.0569,lng:14.5058},
+  {name:'Bratislava',country:'Slowakei',lat:48.1486,lng:17.1077},
+  {name:'Tallinn',country:'Estland',lat:59.437,lng:24.7536},
+  {name:'Riga',country:'Lettland',lat:56.9496,lng:24.1052},
+  {name:'Vilnius',country:'Litauen',lat:54.6872,lng:25.2797},
+  {name:'Lyon',country:'Frankreich',lat:45.764,lng:4.8357},
+  {name:'Marseille',country:'Frankreich',lat:43.2965,lng:5.3698},
+  {name:'Nizza',country:'Frankreich',lat:43.7102,lng:7.262},
+  {name:'Valencia',country:'Spanien',lat:39.4699,lng:-0.3763},
+  {name:'Sevilla',country:'Spanien',lat:37.3891,lng:-5.9845},
+  {name:'Neapel',country:'Italien',lat:40.8518,lng:14.2681},
+  {name:'Florenz',country:'Italien',lat:43.7696,lng:11.2558},
+  {name:'Venedig',country:'Italien',lat:45.4408,lng:12.3155}
 ];
 
 const eventTemplates = [
@@ -58,12 +89,24 @@ for (const city of cities){
     const lngShift=(((i*7)%5)-2)*.022;
     events.push({
       id:eventId++,name:i===0?`${city.name} Next Up`:t[0],type:t[1],genre:t[2],parentGenre:['Techno','Hardtechno','House'].includes(t[2])?'Electronic':t[2],icon:t[3],price:t[4],outdoor:t[5],age:t[6],
-      date:futureDate(offset),time:['11:00','14:00','18:30','20:00','23:00'][i%5],city:city.name,country:city.country,
+      date:(i===0?slotFromNow(-1).date:i===1?slotFromNow(1).date:futureDate(offset)),time:(i===0?slotFromNow(-1).time:i===1?slotFromNow(1).time:['11:00','14:00','18:30','20:00','23:00'][i%5]),city:city.name,country:city.country,
       place:[`${city.name} City Center`,`${city.name} Kulturquartier`,`${city.name} Riverside`,`${city.name} Arena`][i%4],
       lat:city.lat+latShift,lng:city.lng+lngShift,popularity:98-((i*7)%54),added:futureDate(-((i*3)%21)),
       art:p,imageUrl:'',imageCredit:'',ticketUrl:'#',websiteUrl:'#',instagramUrl:'#',facebookUrl:'#',
       sources:['Veranstalter','Ticketshop',i%2?'Instagram':'Stadt-/Eventkalender']
     });
+  }
+}
+
+
+function ensureCityEvents(city){
+  if(events.some(e=>e.city.toLowerCase()===city.name.toLowerCase()))return;
+  const seed=cityHash(city.name+'|'+city.country), count=10;
+  for(let i=0;i<count;i++){
+    const t=eventTemplates[(seed+i)%eventTemplates.length], p=palette[(seed+i)%palette.length];
+    const a=((seed+i*17)%360)*Math.PI/180, r=.012+((seed+i*23)%45)/1000;
+    const live=i===0?slotFromNow(-1):i===1?slotFromNow(1):null;
+    events.push({id:eventId++,name:i===0?`${city.name} Live Pulse`:i===1?`${city.name} Next Up`:t[0],type:t[1],genre:t[2],parentGenre:['Techno','Hardtechno','House'].includes(t[2])?'Electronic':t[2],icon:t[3],price:t[4],outdoor:t[5],age:t[6],date:live?live.date:futureDate((i*3+seed)%48+2),time:live?live.time:['11:00','14:00','18:30','20:00','23:00'][i%5],city:city.name,country:city.country,place:[`${city.name} Center`,`${city.name} Riverside`,`${city.name} Culture District`,`${city.name} Arena`][i%4],lat:city.lat+Math.cos(a)*r,lng:city.lng+Math.sin(a)*r,popularity:94-((i*5)%45),added:futureDate(-((i*2)%14)),art:p,imageUrl:'',imageCredit:'',ticketUrl:'#',websiteUrl:'#',instagramUrl:'#',facebookUrl:'#',sources:['Veranstalter','Ticketshop',i%2?'Instagram':'Lokaler Eventkalender']});
   }
 }
 
@@ -203,7 +246,7 @@ async function ensureMap(){
       if(!window.L)throw new Error('Leaflet nicht geladen');
       if(state.mapReady)return state.map;
       $('mapFallback').classList.add('hidden');
-      state.map=L.map('map',{zoomControl:false,attributionControl:true}).setView([state.city.lat,state.city.lng],12);
+      state.map=L.map('map',{zoomControl:false,attributionControl:true,dragging:true,scrollWheelZoom:true,touchZoom:true,doubleClickZoom:true,boxZoom:true,keyboard:true,worldCopyJump:true}).setView([state.city.lat,state.city.lng],12);
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap contributors'}).addTo(state.map);
       state.map.on('moveend zoomend',()=>{const b=state.map.getBounds();state.bounds={south:b.getSouth(),north:b.getNorth(),west:b.getWest(),east:b.getEast()};if($('radius').value==='map')render();else renderMapMarkers(sorted(filtered()));});
       state.mapReady=true;render();return state.map;
@@ -234,14 +277,14 @@ function centerMap(){if(state.mapReady)state.map.setView([state.city.lat,state.c
 async function chooseCity(query){
   const q=query.trim();if(!q)return;
   const local=cities.find(c=>c.name.toLowerCase()===q.toLowerCase()||`${c.name}, ${c.country}`.toLowerCase()===q.toLowerCase());
-  if(local){state.city={...local};$('place').value=local.name;centerMap();recordSearch(local.name);render();return}
+  if(local){state.city={...local};ensureCityEvents(state.city);$('place').value=local.name;if(state.consent.map){await ensureMap();state.map?.setView([local.lat,local.lng],12)}recordSearch(local.name);render();return}
   if(!state.consent.map){showGeneric('Externe Ortssuche','Für unbekannte Städte benötigt NXTUP den externen Geocoding-Dienst. Aktiviere dafür „Externe Karte“ in den Datenschutzeinstellungen. Die vorbereiteten Demo-Städte funktionieren ohne externen Dienst.',`<button class="ctaSmall" onclick="openConsent()">Einstellungen öffnen</button>`);return}
   try{
     const cache=readJSON('nxtupGeoCacheV1',{});let result=cache[q.toLowerCase()];
     if(!result){
       const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&addressdetails=1&q=${encodeURIComponent(q)}`;const r=await fetch(url,{headers:{'Accept-Language':state.language==='en'?'en':'de'}});const data=await r.json();if(!data.length)throw new Error('not found');result={name:data[0].display_name.split(',')[0],country:data[0].address?.country||'',lat:Number(data[0].lat),lng:Number(data[0].lon)};cache[q.toLowerCase()]=result;writeJSON('nxtupGeoCacheV1',cache);
     }
-    state.city=result;$('place').value=result.name;if(state.mapReady)state.map.setView([result.lat,result.lng],12);recordSearch(result.name);render();
+    state.city=result;ensureCityEvents(result);$('place').value=result.name;await ensureMap();if(state.mapReady)state.map.setView([result.lat,result.lng],12);recordSearch(result.name);render();
   }catch{showGeneric('Ort nicht gefunden','Versuche eine Stadt, einen Ort oder eine PLZ. Für den Prototyp sind mehrere europäische Städte direkt vorbereitet.');}
 }
 function recordSearch(q){if(!state.consent.personalization)return;const h=readJSON(historyKey,[]).filter(x=>x!==q);h.unshift(q);writeJSON(historyKey,h.slice(0,8))}
@@ -296,6 +339,33 @@ function applyCityFilter(kind){
 function surpriseMe(){const es=sorted(filtered());if(!es.length){showGeneric('Heute kein Match','Lockere einen Filter oder vergrößere den Radius.');return}const pool=es.slice(0,Math.min(8,es.length)),e=pool[Math.floor(Math.random()*pool.length)];openEvent(e.id)}
 function weekendPlan(){const [a,b]=dateRange('weekend'),es=events.filter(e=>eventDistance(e)<=50&&e.date>=a&&e.date<=b).sort((x,y)=>(x.date+x.time).localeCompare(y.date+y.time));const picks=[];for(const e of es){if(!picks.some(x=>x.date===e.date))picks.push(e);if(picks.length===3)break}const html=picks.length?picks.map(e=>`<button class="detailsBtn" style="display:block;width:100%;text-align:left;margin:8px 0" onclick="openEvent(${e.id})">${esc(dateLabel(e))} · ${esc(e.time)} — ${esc(e.name)}</button>`).join(''):'<p>Für dieses Wochenende gibt es mit den Demo-Daten noch keinen passenden Plan.</p>';showGeneric(`Dein Wochenende in ${state.city.name}`,'Drei einfache Ideen, die du direkt öffnen und merken kannst.',html)}
 function toggleHeatmap(on){state.heatmap=on;$('heatMode').classList.toggle('active',on);$('pinsMode').classList.toggle('active',!on);$('heatLegend').classList.toggle('hidden',!on);if(state.mapReady)renderMapMarkers(sorted(filtered()))}
+
+function openQuickDiscover(){
+  $('genericBody').innerHTML=`<div class="modalContent"><p class="kicker">QUICK DISCOVER</p><h1>Find what’s next.</h1><p>Wie möchtest du gerade entdecken?</p><div class="quickDiscoverGrid"><button onclick="openLiveSearch()"><span>⚡</span>Was geht jetzt?</button><button onclick="surpriseMe()"><span>🎲</span>Überrasch mich</button><button onclick="quickWeekend()"><span>🎉</span>Dieses Wochenende</button><button onclick="quickNearby()"><span>📍</span>In meiner Nähe</button><button onclick="quickCity()"><span>🌍</span>Andere Stadt entdecken</button><button onclick="quickMap()"><span>🗺</span>Auf der Karte suchen</button></div></div>`;
+  $('genericModal').showModal();
+}
+window.openQuickDiscover=openQuickDiscover;
+function liveEvents(){const now=new Date(), until=new Date(now.getTime()+6*3600000);return sorted(events.filter(e=>{const d=new Date(`${e.date}T${e.time}:00`);return eventDistance(e)<=50&&d>=new Date(now.getTime()-4*3600000)&&d<=until}))}
+function renderLiveResults(mode='list'){
+  const es=liveEvents();const target=$('liveResults');if(!target)return;
+  if(mode==='map'){target.innerHTML=`<div class="liveMapHint"><strong>🗺 Live-Karte</strong><p>${es.length} laufende oder bald startende Events rund um ${esc(state.city.name)}. Öffne die Hauptkarte, um sie frei zu verschieben und zu zoomen.</p><button class="ctaSmall" id="liveOpenMap">Karte öffnen →</button></div>`;$('liveOpenMap').onclick=()=>{$('genericModal').close();setView('map');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});if(state.consent.map)ensureMap();};return}
+  target.innerHTML=es.length?es.map(e=>`<button class="liveResult" type="button" onclick="openEvent(${e.id})"><span class="liveResultIcon">${esc(e.icon)}</span><span><strong>${esc(e.name)}</strong><small>${esc(eventStatus(e))} · ${esc(e.place)} · ${eventDistance(e).toFixed(1)} km</small></span><b>→</b></button>`).join(''):`<div class="liveMapHint">Gerade nichts Passendes in 50 km. Suche einen anderen Ort oder nutze die Karte.</div>`;
+}
+window.openLiveSearch=function(){
+  $('genericBody').innerHTML=`<div class="liveSearch"><div class="liveSearchHead"><div><p class="kicker">LIVE NOW</p><h1>Was geht jetzt?</h1><p>Ort eingeben oder deinen Standort verwenden.</p></div><span class="statusBadge">● LIVE</span></div><form id="liveCityForm" class="liveLocationRow"><input id="liveCityInput" value="${esc(state.city.name)}" placeholder="Stadt, Ort oder PLZ in Europa"><button class="ctaSmall" type="submit">Suchen</button><button id="liveLocate" class="ghostBtn" type="button">◎ Standort</button></form><div class="liveTabs"><button id="liveListTab" class="active" type="button">Liste</button><button id="liveMapTab" type="button">Karte</button></div><div id="liveResults" class="liveResults"></div></div>`;
+  $('genericModal').showModal();renderLiveResults('list');
+  $('liveCityForm').onsubmit=async e=>{e.preventDefault();await chooseCity($('liveCityInput').value);$('liveCityInput').value=state.city.name;renderLiveResults('list')};
+  $('liveLocate').onclick=()=>locateUser(true);
+  $('liveListTab').onclick=()=>{$('liveListTab').classList.add('active');$('liveMapTab').classList.remove('active');renderLiveResults('list')};
+  $('liveMapTab').onclick=()=>{$('liveMapTab').classList.add('active');$('liveListTab').classList.remove('active');renderLiveResults('map')};
+};
+function quickWeekend(){$('genericModal').close();setQuickDate('weekend');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'})}window.quickWeekend=quickWeekend;
+function quickNearby(){$('genericModal').close();locateUser(false)}window.quickNearby=quickNearby;
+function quickCity(){$('genericModal').close();$('place').focus();window.scrollTo({top:0,behavior:'smooth'})}window.quickCity=quickCity;
+function quickMap(){$('genericModal').close();setView('map');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});if(state.consent.map)ensureMap()}window.quickMap=quickMap;
+function showAccount(){showGeneric('NXTUP Account','Im Prototyp ist noch keine Datenbank verbunden. Später kannst du hier ein Profil erstellen, dich anmelden und Favoriten, Suchanfragen, Erinnerungen und gefolgte Locations geräteübergreifend synchronisieren.',`<div class="quickDiscoverGrid"><button onclick="showGeneric('Profil erstellen','Demo: Registrierung wird mit der Backend-Stufe aktiviert.')"><span>＋</span>Profil erstellen</button><button onclick="showGeneric('Anmelden','Demo: Login wird mit der Backend-Stufe aktiviert.')"><span>→</span>Anmelden</button></div>`)}
+function locateUser(fromLive=false){if(!navigator.geolocation){showGeneric('Standort nicht verfügbar','Dein Browser unterstützt die Standortfunktion nicht.');return}navigator.geolocation.getCurrentPosition(async pos=>{state.userLocation={lat:pos.coords.latitude,lng:pos.coords.longitude};state.city={name:'In deiner Nähe',country:'',lat:pos.coords.latitude,lng:pos.coords.longitude};ensureCityEvents(state.city);$('place').value='Mein Standort';if(state.consent.map){await ensureMap();state.map?.setView([state.userLocation.lat,state.userLocation.lng],13)}render();if(fromLive&&$('genericModal').open){const inp=$('liveCityInput');if(inp)inp.value='Mein Standort';renderLiveResults('list')}},()=>showGeneric('Standort nicht freigegeben','Du kannst NXTUP vollständig über die freie Stadtsuche verwenden.'))}
+
 function bind(){
   ['type','genre','radius','from','to','free','outdoor','indoor','maxPrice','startTime','age','sort'].forEach(id=>$(id).addEventListener('input',render));
   $('citySearch').addEventListener('submit',e=>{e.preventDefault();chooseCity($('place').value)});
@@ -303,16 +373,16 @@ function bind(){
   $('more').onclick=()=>$('morePanel').classList.remove('hidden');$('closeFilters').onclick=()=>$('morePanel').classList.add('hidden');$('applyFilters').onclick=()=>{$('morePanel').classList.add('hidden');render()};$('reset').onclick=resetFilters;
   $('mapBtn').onclick=()=>setView('map');$('gridBtn').onclick=()=>setView('grid');$('listBtn').onclick=()=>setView('list');$('splitBtn').onclick=()=>setView('split');$('densityBtn').onclick=()=>{state.dense=!state.dense;document.body.classList.toggle('dense',state.dense);$('densityBtn').setAttribute('aria-pressed',String(state.dense));$('densityBtn').textContent=state.dense?'Groß':'Kompakt'};
   $('theme').onclick=updateTheme;$('language').onclick=toggleLanguage;
-  $('now').onclick=()=>{const [a,b]=dateRange('today');$('from').value=a;$('to').value=b;$('radius').value='25';$('startTime').value=new Date().toTimeString().slice(0,5);render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'})};
+  $('now').onclick=openLiveSearch;$('heroDiscover').onclick=openQuickDiscover;$('accountBtn').onclick=showAccount;
   $('toggleRecommendations').onclick=()=>{state.recommendations=!state.recommendations;$('toggleRecommendations').textContent=state.recommendations?'Empfehlungen ausblenden':'Empfehlungen anzeigen';render()};
-  $('enableMap').onclick=()=>{state.consent.map=true;$('consentMap').checked=true;openConsent()};
+  $('enableMap').onclick=()=>saveConsent({map:true});
   $('zoomIn').onclick=()=>state.mapReady&&state.map.zoomIn();$('zoomOut').onclick=()=>state.mapReady&&state.map.zoomOut();$('resetMap').onclick=centerMap;$('fullscreenMap').onclick=()=>{const el=$('map').parentElement;if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.()};$('searchMapArea').onclick=()=>{if(!state.mapReady)return;const b=state.map.getBounds();state.bounds={south:b.getSouth(),north:b.getNorth(),west:b.getWest(),east:b.getEast()};$('radius').value='map';render()};
-  const locate=()=>{if(!navigator.geolocation){showGeneric('Standort nicht verfügbar','Dein Browser unterstützt die Standortfunktion nicht.');return}navigator.geolocation.getCurrentPosition(pos=>{state.userLocation={lat:pos.coords.latitude,lng:pos.coords.longitude};if(state.mapReady)state.map.setView([state.userLocation.lat,state.userLocation.lng],13);render()},()=>showGeneric('Standort nicht freigegeben','Du kannst NXTUP vollständig über die freie Stadtsuche verwenden.'))};$('locate').onclick=locate;$('mapLocate').onclick=locate;
+  $('locate').onclick=()=>locateUser(false);$('mapLocate').onclick=()=>locateUser(false);
   $('closePreview').onclick=closePreview;$('closeModal').onclick=()=>{if($('eventModal').open)$('eventModal').close()};$('closeGeneric').onclick=()=>$('genericModal').close();$('closeConsent').onclick=()=>$('consentModal').close();
   [$('eventModal'),$('genericModal'),$('consentModal')].forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
   window.addEventListener('popstate',()=>{if($('eventModal').open)$('eventModal').close()});
   let y0=null;$('preview').addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});$('preview').addEventListener('touchend',e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>80)closePreview();y0=null},{passive:true});
-  $('saveSearchBtn').onclick=saveSearch;$('savedSearchesBtn').onclick=showSavedSearches;$('saved').onclick=showFavorites;$('profile').onclick=()=>showGeneric('NXTUP Account','Accounts kommen mit der Backend-/Datenbank-Stufe. Entdecken funktioniert weiterhin ohne Login.');$('navSearch').onclick=()=>document.querySelector('.discoveryShell').scrollIntoView({behavior:'smooth'});
+  $('saveSearchBtn').onclick=saveSearch;$('savedSearchesBtn').onclick=showSavedSearches;$('saved').onclick=showFavorites;$('profile').onclick=showAccount;$('navSearch').onclick=()=>document.querySelector('.discoveryShell').scrollIntoView({behavior:'smooth'});
   $('cityMapBtn').onclick=()=>setView('map');document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('surpriseBtn').onclick=surpriseMe;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
   $('privacyLink').onclick=showPrivacy;$('privacyBtnTop').onclick=openConsent;$('cookieLink').onclick=openConsent;$('organizerBtn').onclick=organizerDemo;
   $('consentSettings').onclick=openConsent;$('consentNecessary').onclick=()=>saveConsent({personalization:false,map:false,media:false});$('consentAll').onclick=()=>saveConsent({personalization:true,map:true,media:true});$('saveConsent').onclick=()=>saveConsent({personalization:$('consentPersonalization').checked,map:$('consentMap').checked,media:$('consentMedia').checked});$('acceptAllModal').onclick=()=>saveConsent({personalization:true,map:true,media:true});
