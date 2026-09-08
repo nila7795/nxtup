@@ -58,18 +58,18 @@ const cities = [
 ];
 
 const eventTemplates = [
-  ['City Pulse Open Air','Festival','Electronic','⚡',29,true,18],
-  ['Street Food Fiesta','Food & Drink','', '🍔',0,true,0],
-  ['Indie After Dark','Konzert','Indie','🎸',22,false,16],
-  ['Night Shift','Party / Club','House','🎧',16,false,18],
-  ['Laugh Local','Comedy','', '🎭',31,false,0],
-  ['Summer Streets','Stadtfest','Live Music','🎉',0,true,0],
-  ['Bass District','Festival','Techno','🔊',39,true,18],
-  ['Jazz Courtyard','Konzert','Jazz','🎷',18,true,0],
-  ['Family Sunday','Familie & Kinder','', '☀️',8,true,0],
-  ['Design & Culture Night','Theater & Kultur','', '✦',12,false,0],
-  ['Hardtechno Warehouse','Party / Club','Hardtechno','⚡',24,false,18],
-  ['Local Makers Market','Markt','', '◌',0,true,0]
+  ['City Pulse Open Air','Festival','Electronic','FEST',29,true,18],
+  ['Street Food Fiesta','Food & Drink','', 'FOOD',0,true,0],
+  ['Indie After Dark','Konzert','Indie','LIVE',22,false,16],
+  ['Night Shift','Party / Club','House','CLUB',16,false,18],
+  ['Laugh Local','Comedy','', 'SHOW',31,false,0],
+  ['Summer Streets','Stadtfest','Live Music','CITY',0,true,0],
+  ['Bass District','Festival','Techno','FEST',39,true,18],
+  ['Jazz Courtyard','Konzert','Jazz','LIVE',18,true,0],
+  ['Family Sunday','Familie & Kinder','', 'FAMILY',8,true,0],
+  ['Design & Culture Night','Theater & Kultur','', 'CULTURE',12,false,0],
+  ['Hardtechno Warehouse','Party / Club','Hardtechno','CLUB',24,false,18],
+  ['Local Makers Market','Markt','', 'MARKET',0,true,0]
 ];
 
 const palette = [
@@ -120,7 +120,7 @@ const venues=[
 ];
 function followedVenues(){return state.consent.personalization?readJSON(followedVenuesKey,[]):[]}
 window.toggleVenueFollow=function(name){if(!state.consent.personalization){openConsent();return}let x=followedVenues();x=x.includes(name)?x.filter(v=>v!==name):[...x,name];writeJSON(followedVenuesKey,x);showVenue(name)};
-function showVenue(name){const v=venues.find(x=>x.name===name);if(!v)return;const followed=followedVenues().includes(v.name);const city=cities.find(c=>c.name===v.city);if(city)ensureCityEvents(city);const es=events.filter(e=>e.city===v.city&&e.type==='Party / Club').slice(0,5);$('genericBody').innerHTML=`<div class="modalContent"><p class="kicker">${esc(v.type.toUpperCase())}</p><h1>${esc(v.name)}</h1><p>${esc(v.city)} · ${esc(v.country)}</p><button class="followBtn" onclick="toggleVenueFollow('${esc(v.name)}')">${followed?'Gefolgt':'Location folgen'}</button><h3 style="margin-top:26px">Kommende Events</h3><div class="venueSearchResults">${es.map(e=>`<button class="venueResult" onclick="openEvent(${e.id})"><span><strong>${esc(e.name)}</strong><small>${esc(dateLabel(e))} · ${esc(e.time)}</small></span><b>→</b></button>`).join('')||'<p>Noch keine Events in den Demo-Daten.</p>'}</div><p class="trialNote">Mit NXTUP+ kannst du Benachrichtigungen für neue Events deiner Lieblingslocations aktivieren.</p></div>`;$('genericModal').showModal()}
+function showVenue(name){const v=venues.find(x=>x.name===name);if(!v)return;const followed=followedVenues().includes(v.name);const city=cities.find(c=>c.name===v.city);if(city)ensureCityEvents(city);const es=events.filter(e=>e.city===v.city&&e.type==='Party / Club').slice(0,5);$('genericBody').innerHTML=`<div class="modalContent"><p class="kicker">${esc(v.type.toUpperCase())}</p><h1>${esc(v.name)}</h1><p>${esc(v.city)} · ${esc(v.country)}</p><button class="followBtn" onclick="toggleVenueFollow('${esc(v.name)}')">${followed?'Gefolgt':'Location folgen'}</button><h3 style="margin-top:26px">Kommende Events</h3><div class="venueSearchResults">${es.map(e=>`<button class="venueResult" onclick="openEvent(${e.id})"><span><strong>${esc(e.name)}</strong><small>${esc(dateLabel(e))} · ${esc(e.time)}</small></span><b>Öffnen</b></button>`).join('')||'<p>Noch keine Events in den Demo-Daten.</p>'}</div><p class="trialNote">Mit NXTUP+ kannst du Benachrichtigungen für neue Events deiner Lieblingslocations aktivieren.</p></div>`;$('genericModal').showModal()}
 window.showVenue=showVenue;
 
 const state={
@@ -204,13 +204,11 @@ function sourceImage(e){
   if(/^https?:/i.test(e.imageUrl)&&!state.consent.media)return '';
   return `<img src="${esc(e.imageUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`;
 }
-function art(e){const [a,b,c]=e.art;return `<div class="eventArt" style="--art1:${a};--art2:${b};--art3:${c}">${sourceImage(e)}<div class="shade"></div><span class="eventBadge">${esc(e.icon)} ${esc(e.type)}</span></div>`}
-function meta(e,compact=false){
-  const km=eventDistance(e);return `<div class="meta"><span class="pill">📅 ${esc(dateLabel(e))} · ${esc(e.time)}</span><span class="pill">📍 ${km<1?'&lt;1':km.toFixed(0)} km</span><span class="pill">${esc(priceLabel(e))}</span>${compact?'':`<span class="pill">${e.outdoor?'☀️ Outdoor':'🏠 Indoor'}</span>`}</div>`;
-}
+function art(e){const [a,b,c]=e.art;return `<div class="eventArt" style="--art1:${a};--art2:${b};--art3:${c}">${sourceImage(e)}<div class="shade"></div><span class="eventBadge">${esc(e.type)}</span></div>`}
+
 function eventStatus(e){
   const start=new Date(`${e.date}T${e.time}:00`), now=new Date(), diff=start-now;
-  if(diff<=0&&diff>-4*3600000)return '● LIVE NOW';
+  if(diff<=0&&diff>-4*3600000)return 'LIVE NOW';
   if(diff>0&&diff<3600000)return `STARTET IN ${Math.max(1,Math.round(diff/60000))} MIN.`;
   if(e.date===toISO(now))return `HEUTE · ${e.time}`;
   return `${dateLabel(e)} · ${e.time}`;
@@ -220,12 +218,14 @@ function confidence(e){return Math.min(99,84+e.sources.length*5)}
 window.shareEvent=async function(id){const e=events.find(x=>x.id===id);if(!e)return;const data={title:e.name,text:`${e.name} · ${e.city} · ${dateLabel(e)} ${e.time}`,url:location.href.split('#')[0]+`#event-${id}`};try{if(navigator.share)await navigator.share(data);else{await navigator.clipboard.writeText(data.url);showGeneric('Link kopiert','Der Eventlink wurde in die Zwischenablage kopiert.')}}catch{}}
 window.remindEvent=function(id){if(!state.consent.personalization){openConsent();return}const r=readJSON('nxtupRemindersV1',[]);if(!r.includes(id)){r.push(id);writeJSON('nxtupRemindersV1',r)}showGeneric('Erinnerung vorgemerkt','Im Prototyp ist die Erinnerung lokal vorgemerkt. Mit Backend/PWA-Push kann NXTUP später 1 Tag, 3 Stunden oder 1 Stunde vorher benachrichtigen.')}
 function card(e,where='grid'){
-  const fav=isFavorite(e.id);return `<article class="eventCard ${state.dense?'compact':''}" data-id="${e.id}"><button class="saveBtn ${fav?'saved':''}" type="button" aria-label="${fav?'Aus Merkliste entfernen':'Event speichern'}" onclick="toggleFavorite(${e.id},event)">${fav?'♥':'♡'}</button><div class="statusBadge">${esc(eventStatus(e))}</div>${art(e)}<div class="cardBody"><h3>${esc(e.name)}</h3><p>${esc(e.place)} · ${esc(e.city)}</p>${meta(e,where==='split')}<p>${esc(e.genre||e.type)}${e.age?` · ${e.age}+`:''}</p><div class="eventSocial"><span>🔥 ${interestCount(e)} interessiert</span><span>·</span><span>✓ ${confidence(e)}% verifiziert</span></div><div class="cardActions"><button class="detailsBtn" type="button" onclick="openEvent(${e.id})">Details</button><button class="ctaSmall" type="button" onclick="openEvent(${e.id})">Ansehen →</button></div></div></article>`;
+  const fav=isFavorite(e.id);return `<article class="eventCard ${state.dense?'compact':''}" data-id="${e.id}"><button class="saveBtn ${fav?'saved':''}" type="button" aria-label="${fav?'Aus Merkliste entfernen':'Event speichern'}" onclick="toggleFavorite(${e.id},event)">${fav?'Gespeichert':'Merken'}</button><div class="statusBadge">${esc(eventStatus(e))}</div>${art(e)}<div class="cardBody"><h3>${esc(e.name)}</h3><p>${esc(e.place)} · ${esc(e.city)}</p>${meta(e,where==='split')}<p>${esc(e.genre||e.type)}${e.age?` · ${e.age}+`:''}</p><div class="eventSocial"><span>${interestCount(e)} interessiert</span><span>·</span><span>${confidence(e)}% verifiziert</span></div><div class="cardActions"><button class="detailsBtn" type="button" onclick="openEvent(${e.id})">Details</button><button class="ctaSmall" type="button" onclick="openEvent(${e.id})">Ansehen</button></div></div></article>`;
 }
+
 function detail(e){
   const maps=`https://www.openstreetmap.org/?mlat=${encodeURIComponent(e.lat)}&mlon=${encodeURIComponent(e.lng)}#map=16/${encodeURIComponent(e.lat)}/${encodeURIComponent(e.lng)}`;
-  return `<div class="modalContent">${art(e)}<h1>${esc(e.name)}</h1>${meta(e)}<p><strong>${esc(e.place)}, ${esc(e.city)}</strong></p><p>${esc(e.genre||e.type)} · ${e.age?`ab ${e.age}`:'für alle Altersgruppen'} · ${e.outdoor?'Outdoor':'Indoor'}</p><div class="detailQuickActions"><button onclick="toggleFavorite(${e.id},event)">♡ Merken</button><button onclick="shareEvent(${e.id})">↗ Teilen</button><button onclick="remindEvent(${e.id})">🔔 Erinnern</button></div><div class="vibeBox"><strong>👀 Get the vibe</strong><span>Eventbilder, Veranstalter-Medien und erlaubte Social-Quellen werden hier gebündelt.</span></div><p>Dieser Eintrag zeigt die spätere NXTUP-Struktur. Echte Beschreibungen, Bilder und Quellen werden nur aus erlaubten Feeds/APIs bzw. mit geklärten Nutzungsrechten übernommen.</p><span class="confidence">✓ ${confidence(e)}% verifiziert · ${e.sources.length} Quellen abgeglichen</span><a class="primaryLink" href="${maps}" target="_blank" rel="noopener noreferrer">ROUTE / KARTE ÖFFNEN</a><div class="sourceLinks"><a href="#" onclick="return false">🎟 Tickets</a><a href="#" onclick="return false">◎ Instagram</a><a href="#" onclick="return false">f Facebook</a><a href="#" onclick="return false">🌐 Website</a></div><small class="muted">${e.sources.length} Quellen: ${e.sources.map(esc).join(' · ')}</small></div>`;
+  return `<div class="modalContent">${art(e)}<h1>${esc(e.name)}</h1>${meta(e)}<p><strong>${esc(e.place)}, ${esc(e.city)}</strong></p><p>${esc(e.genre||e.type)} · ${e.age?`ab ${e.age}`:'für alle Altersgruppen'} · ${e.outdoor?'Outdoor':'Indoor'}</p><div class="detailQuickActions"><button onclick="toggleFavorite(${e.id},event)">Merken</button><button onclick="shareEvent(${e.id})">Teilen</button><button onclick="remindEvent(${e.id})">Erinnern</button></div><div class="vibeBox"><strong>Atmosphäre</strong><span>Eventbilder, Veranstalter-Medien und erlaubte Social-Quellen werden hier gebündelt.</span></div><p>Dieser Eintrag zeigt die spätere NXTUP-Struktur. Echte Beschreibungen, Bilder und Quellen werden nur aus erlaubten Feeds/APIs bzw. mit geklärten Nutzungsrechten übernommen.</p><span class="confidence">${confidence(e)}% verifiziert · ${e.sources.length} Quellen abgeglichen</span><a class="primaryLink" href="${maps}" target="_blank" rel="noopener noreferrer">Route / Karte öffnen</a><div class="sourceLinks"><a href="#" onclick="return false">Tickets</a><a href="#" onclick="return false">Instagram</a><a href="#" onclick="return false">Facebook</a><a href="#" onclick="return false">Website</a></div><small class="muted">${e.sources.length} Quellen: ${e.sources.map(esc).join(' · ')}</small></div>`;
 }
+
 
 function renderActiveFilters(){
   const items=[];if($('type').value)items.push($('type').value);if($('genre').value)items.push($('genre').value);if($('from').value)items.push(`ab ${$('from').value}`);if($('to').value)items.push(`bis ${$('to').value}`);if($('free').checked)items.push('kostenlos');if($('outdoor').checked)items.push('Outdoor');if($('indoor').checked)items.push('Indoor');if($('minPrice').value&&Number($('minPrice').value)>0)items.push(`ab ${$('minPrice').value} €`);if($('maxPrice').value)items.push(`bis ${$('maxPrice').value} €`);if($('startTime').value)items.push(`ab ${$('startTime').value}`);
@@ -234,15 +234,15 @@ function renderActiveFilters(){
 function renderRecommendations(es){
   if(!state.recommendations){$('recommendations').classList.add('hidden');return}$('recommendations').classList.remove('hidden');
   const weekend=dateRange('weekend'), free=es.filter(e=>!e.price).length, popular=es.filter(e=>e.popularity>80).length, nearby=es.filter(e=>eventDistance(e)<=10).length, weekendCount=es.filter(e=>e.date>=weekend[0]&&e.date<=weekend[1]).length;
-  const recs=[['🔥','Trending',`${popular} beliebte Events`],['📍','In deiner Nähe',`${nearby} Events unter 10 km`],['🎉','Dieses Wochenende',`${weekendCount} Ideen`],['🆓','Kostenlos',`${free} ohne Eintritt`],['✨','Neu entdeckt',`${es.filter(e=>e.added>=futureDate(-7)).length} neue Einträge`]];
-  $('recommendationRail').innerHTML=recs.map(r=>`<article class="recCard"><span>${r[0]}</span><strong>${r[1]}</strong><small>${r[2]}</small></article>`).join('');
+  const recs=[['Trending',`${popular} beliebte Events`],['In deiner Nähe',`${nearby} Events unter 10 km`],['Dieses Wochenende',`${weekendCount} Ideen`],['Kostenlos',`${free} ohne Eintritt`],['Neu entdeckt',`${es.filter(e=>e.added>=futureDate(-7)).length} neue Einträge`]];
+  $('recommendationRail').innerHTML=recs.map(r=>`<article class="recCard"><strong>${r[0]}</strong><small>${r[1]}</small></article>`).join('');
 }
 function render(){
   const es=sorted(filtered());$('count').textContent=`${es.length} Event${es.length===1?'':'s'}`;$('heroCount').textContent=es.length;$('context').textContent=` rund um ${state.city.name}`;$('heroLocation').textContent=`${state.city.name.toUpperCase()} · ${$('radius').value==='city'?'STADT':$('radius').value==='map'?'KARTENAUSSCHNITT':$('radius').value+' KM'}`;
   $('cityModeTitle').textContent=state.city.name;$('cityModeCount').textContent=es.length;$('gridView').innerHTML=es.map(e=>card(e,'grid')).join('')||emptyResults();$('listView').innerHTML=es.map(e=>card(e,'list')).join('')||emptyResults();$('splitList').innerHTML=es.map(e=>card(e,'split')).join('')||emptyResults();
   renderActiveFilters();renderRecommendations(es);if(state.mapReady)renderMapMarkers(es);
 }
-function emptyResults(){return `<div class="emptyState"><span>⌕</span><strong>Nichts Passendes gefunden.</strong><p>Vergrößere den Radius oder entferne einen Filter.</p></div>`}
+function emptyResults(){return `<div class="emptyState"><strong>Nichts Passendes gefunden.</strong><p>Vergrößere den Radius, Zeitraum oder entferne einen Filter.</p></div>`}
 
 function setView(view){
   state.view=view;['mapView','gridView','listView','splitView'].forEach(id=>$(id).classList.add('hidden'));['mapBtn','gridBtn','listBtn','splitBtn'].forEach(id=>$(id).classList.remove('active'));
@@ -306,7 +306,7 @@ async function chooseCity(query){
 function recordSearch(q){if(!state.consent.personalization)return;const h=readJSON(historyKey,[]).filter(x=>x!==q);h.unshift(q);writeJSON(historyKey,h.slice(0,8))}
 
 window.preview=function(id){const e=events.find(x=>x.id===id);if(!e)return;$('preview').classList.remove('empty');$('preview').innerHTML=`<button id="closePreviewDynamic" class="closePanel" type="button" aria-label="Vorschau schließen">×</button>${card(e,'preview')}`;$('closePreviewDynamic').onclick=closePreview;};
-function closePreview(){$('preview').classList.add('empty');$('preview').innerHTML=`<button id="closePreview" class="closePanel" type="button" aria-label="Vorschau schließen">×</button><div class="emptyState"><span>↗</span><strong>Pick your next move.</strong><p>Wähle einen Pin oder ein Event aus.</p></div>`;$('closePreview').onclick=closePreview}
+function closePreview(){$('preview').classList.add('empty');$('preview').innerHTML=`<button id="closePreview" class="closePanel" type="button" aria-label="Vorschau schließen">×</button><div class="emptyState"><strong>Pick your next move.</strong><p>Wähle einen Pin oder ein Event aus.</p></div>`;$('closePreview').onclick=closePreview}
 window.openEvent=function(id){const e=events.find(x=>x.id===id);if(!e)return;$('modalBody').innerHTML=detail(e);$('eventModal').showModal();history.pushState({nxtupModal:true},'','#event-'+id)};
 window.toggleFavorite=function(id,ev){ev?.stopPropagation();if(!state.consent.personalization){openConsent();return}let f=favorites();f=f.includes(id)?f.filter(x=>x!==id):[...f,id];writeJSON(favoritesKey,f);render();};
 window.openConsent=openConsent;
@@ -338,7 +338,7 @@ function setupSelects(){
   const genres=['Electronic','Techno','Hardtechno','House','Indie','Jazz','Live Music'];genres.forEach(v=>$('genre').add(new Option(v,v)));
   cities.forEach(c=>{const o=document.createElement('option');o.value=c.name;o.label=`${c.name}, ${c.country}`;$('citySuggestions').appendChild(o)});venues.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.label=`${v.type} · ${v.city}`;$('citySuggestions').appendChild(o)});
 }
-function updateTheme(){document.body.classList.toggle('dark');if(state.consent.personalization)localStorage.setItem(themeKey,document.body.classList.contains('dark')?'dark':'light');if(state.mapReady)setTimeout(()=>state.map.invalidateSize(),30)}
+function updateTheme(){document.body.classList.toggle('dark');$('theme').textContent=document.body.classList.contains('dark')?'Light':'Dark';if(state.consent.personalization)localStorage.setItem(themeKey,document.body.classList.contains('dark')?'dark':'light');if(state.mapReady)setTimeout(()=>state.map.invalidateSize(),30)}
 function toggleLanguage(){state.language=state.language==='de'?'en':'de';$('language').textContent=state.language.toUpperCase();if(state.consent.personalization)localStorage.setItem(langKey,state.language);$('place').placeholder=state.language==='en'?'City, place or postcode in Europe':'Stadt, Ort oder PLZ in Europa';render()}
 
 function applyCityFilter(kind){
@@ -352,7 +352,7 @@ function applyCityFilter(kind){
   if(kind==='trending')$('sort').value='popular';
   render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});
 }
-function surpriseMe(){showPremium('Persönliche Inspiration','NXTUP+ berücksichtigt deinen Ort, dein Budget, Interessen, Favoriten und Lieblingslocations und schlägt dir gezielt passende Events vor.')}
+function openInspiration(){showPremium('Persönliche Inspiration','NXTUP+ berücksichtigt deinen Ort, dein Budget, Interessen, Favoriten und Lieblingslocations und schlägt dir gezielt passende Events vor.')}
 function weekendPlan(){showPremium('Plan my Weekend','NXTUP+ plant dein Wochenende automatisch anhand von Stadt, Zeit, Interessen, Entfernung und Budget.')}
 function toggleHeatmap(on){state.heatmap=on;$('heatMode').classList.toggle('active',on);$('pinsMode').classList.toggle('active',!on);$('heatLegend').classList.toggle('hidden',!on);if(state.mapReady)renderMapMarkers(sorted(filtered()))}
 
@@ -364,11 +364,11 @@ window.openQuickDiscover=openQuickDiscover;
 function liveEvents(){const now=new Date(), until=new Date(now.getTime()+6*3600000);return sorted(events.filter(e=>{const d=new Date(`${e.date}T${e.time}:00`);return eventDistance(e)<=50&&d>=new Date(now.getTime()-4*3600000)&&d<=until}))}
 function renderLiveResults(mode='list'){
   const es=liveEvents();const target=$('liveResults');if(!target)return;
-  if(mode==='map'){target.innerHTML=`<div class="liveMapHint"><strong>Live-Karte</strong><p>${es.length} laufende oder bald startende Events rund um ${esc(state.city.name)}. Öffne die Hauptkarte, um sie frei zu verschieben und zu zoomen.</p><button class="ctaSmall" id="liveOpenMap">Karte öffnen →</button></div>`;$('liveOpenMap').onclick=()=>{$('genericModal').close();setView('map');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});if(state.consent.map)ensureMap();};return}
-  target.innerHTML=es.length?es.map(e=>`<button class="liveResult" type="button" onclick="openEvent(${e.id})"><span class="liveResultIcon">${esc(e.icon)}</span><span><strong>${esc(e.name)}</strong><small>${esc(eventStatus(e))} · ${esc(e.place)} · ${eventDistance(e).toFixed(1)} km</small></span><b>→</b></button>`).join(''):`<div class="liveMapHint">Gerade nichts Passendes in 50 km. Suche einen anderen Ort oder nutze die Karte.</div>`;
+  if(mode==='map'){target.innerHTML=`<div class="liveMapHint"><strong>Live-Karte</strong><p>${es.length} laufende oder bald startende Events rund um ${esc(state.city.name)}. Öffne die Hauptkarte, um sie frei zu verschieben und zu zoomen.</p><button class="ctaSmall" id="liveOpenMap">Karte öffnen</button></div>`;$('liveOpenMap').onclick=()=>{$('genericModal').close();setView('map');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});if(state.consent.map)ensureMap();};return}
+  target.innerHTML=es.length?es.map(e=>`<button class="liveResult" type="button" onclick="openEvent(${e.id})"><span><strong>${esc(e.name)}</strong><small>${esc(eventStatus(e))} · ${esc(e.place)} · ${eventDistance(e).toFixed(1)} km</small></span><b>Öffnen</b></button>`).join(''):`<div class="liveMapHint">Gerade nichts Passendes in 50 km. Suche einen anderen Ort oder nutze die Karte.</div>`;
 }
 window.openLiveSearch=function(){
-  $('genericBody').innerHTML=`<div class="liveSearch"><div class="liveSearchHead"><div><p class="kicker">LIVE NOW</p><h1>Was geht jetzt?</h1><p>Ort eingeben oder deinen Standort verwenden.</p></div><span class="statusBadge">● LIVE</span></div><form id="liveCityForm" class="liveLocationRow"><input id="liveCityInput" value="${esc(state.city.name)}" placeholder="Stadt, Ort oder PLZ in Europa"><button class="ctaSmall" type="submit">Suchen</button><button id="liveLocate" class="ghostBtn" type="button">◎ Standort</button></form><div class="liveTabs"><button id="liveListTab" class="active" type="button">Liste</button><button id="liveMapTab" type="button">Karte</button></div><div id="liveResults" class="liveResults"></div></div>`;
+  $('genericBody').innerHTML=`<div class="liveSearch"><div class="liveSearchHead"><div><p class="kicker">LIVE NOW</p><h1>Was geht jetzt?</h1><p>Ort eingeben oder deinen Standort verwenden.</p></div><span class="statusBadge">LIVE</span></div><form id="liveCityForm" class="liveLocationRow"><input id="liveCityInput" value="${esc(state.city.name)}" placeholder="Stadt, Ort oder PLZ in Europa"><button class="ctaSmall" type="submit">Suchen</button><button id="liveLocate" class="ghostBtn" type="button">Standort</button></form><div class="liveTabs"><button id="liveListTab" class="active" type="button">Liste</button><button id="liveMapTab" type="button">Karte</button></div><div id="liveResults" class="liveResults"></div></div>`;
   $('genericModal').showModal();renderLiveResults('list');
   $('liveCityForm').onsubmit=async e=>{e.preventDefault();await chooseCity($('liveCityInput').value);$('liveCityInput').value=state.city.name;renderLiveResults('list')};
   $('liveLocate').onclick=()=>locateUser(true);
@@ -380,6 +380,15 @@ function quickNearby(){$('genericModal').close();locateUser(false)}window.quickN
 function quickCity(){$('genericModal').close();$('place').focus();window.scrollTo({top:0,behavior:'smooth'})}window.quickCity=quickCity;
 function quickMap(){$('genericModal').close();setView('map');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});if(state.consent.map)ensureMap()}window.quickMap=quickMap;
 function showPremium(feature='NXTUP+', description='Mehr entdecken, weniger suchen.'){$('genericBody').innerHTML=`<div class="modalContent"><p class="kicker">NXTUP+</p><h1>${esc(feature)}</h1><p>${esc(description)}</p><div class="accountPlans"><article class="planCard featured"><p class="kicker">NXTUP+ PREMIUM</p><h3>Premium</h3><div class="planPrice">3,99 € <small>/ Monat</small></div><p>oder <strong>29,99 € / Jahr</strong></p><ul class="planList"><li>Plan my Weekend</li><li>Dein nächster Move</li><li>Personalisierte Inspiration</li><li>Lieblingsclubs beobachten</li><li>Event- & Club-Benachrichtigungen</li><li>Synchronisierte Favoriten & Suchen</li></ul><button class="planButton" onclick="createDemoAccount('premium')">3 Tage kostenlos testen</button><p class="trialNote">Danach gewähltes Abo. Jederzeit kündbar.</p></article><article class="planCard"><p class="kicker">BASIC</p><h3>Kostenlos</h3><div class="planPrice">0 €</div><ul class="planList"><li>Europaweit Events suchen</li><li>Karte, Liste & Filter</li><li>Was geht jetzt?</li><li>Events & Locations favorisieren</li><li>Basic-Profil</li></ul><button class="planButton" onclick="createDemoAccount('basic')">Basic Account erstellen</button></article></div></div>`;$('genericModal').showModal()}
+
+function showInstallHelp(){
+  const ios=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  const standalone=window.matchMedia('(display-mode: standalone)').matches || navigator.standalone===true;
+  if(standalone){showGeneric('NXTUP ist installiert','Du nutzt NXTUP bereits als installierte Web-App.');return}
+  if(ios){showGeneric('NXTUP auf iPhone installieren','Öffne NXTUP in Safari, tippe auf Teilen und wähle „Zum Home-Bildschirm“. Danach startet NXTUP wie eine eigene App.');return}
+  showGeneric('NXTUP installieren','Nutze im Browser die Funktion „App installieren“ bzw. „Zum Startbildschirm hinzufügen“.');
+}
+
 function showAccount(){showPremium('Dein NXTUP Account','Erstelle kostenlos einen Basic Account oder teste NXTUP+ 3 Tage kostenlos. Im Prototyp wird dein Demo-Status nur lokal gespeichert.')}
 window.createDemoAccount=function(plan){if(!state.consent.personalization){openConsent();return}writeJSON(accountKey,{plan,created:new Date().toISOString()});$('genericModal').close();showGeneric(plan==='premium'?'NXTUP+ aktiviert':'Basic Account erstellt',plan==='premium'?'Deine 3-tägige Premium-Testphase ist im Prototyp aktiviert. Es findet keine echte Zahlung statt.':'Dein kostenloser Demo-Account ist lokal auf diesem Gerät aktiviert.');$('accountBtn').querySelector('b').textContent=plan==='premium'?'NXTUP+':'Profil'};
 window.showPremium=showPremium;
@@ -389,7 +398,7 @@ function bind(){const acc=readJSON(accountKey,null);if(acc)$('accountBtn').query
   $('sort').addEventListener('input',render);
   $('citySearch').addEventListener('submit',e=>{e.preventDefault();chooseCity($('place').value)});
   document.querySelectorAll('[data-date]').forEach(b=>b.onclick=()=>setQuickDate(b.dataset.date,b));
-  $('mainFilterSearch').onclick=()=>{render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});};$('more').onclick=()=>$('morePanel').classList.remove('hidden');$('closeFilters').onclick=()=>$('morePanel').classList.add('hidden');$('applyFilters').onclick=()=>{$('morePanel').classList.add('hidden');render()};$('reset').onclick=resetFilters;
+  $('mainFilterSearch').onclick=()=>{render();setView('grid');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});};$('more').onclick=()=>$('morePanel').classList.remove('hidden');$('closeFilters').onclick=()=>$('morePanel').classList.add('hidden');$('applyFilters').onclick=()=>{$('morePanel').classList.add('hidden');render();setView('grid');document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'})};$('reset').onclick=resetFilters;
   $('mapBtn').onclick=()=>setView('map');$('gridBtn').onclick=()=>setView('grid');$('listBtn').onclick=()=>setView('list');$('splitBtn').onclick=()=>setView('split');$('densityBtn').onclick=()=>{state.dense=!state.dense;document.body.classList.toggle('dense',state.dense);$('densityBtn').setAttribute('aria-pressed',String(state.dense));$('densityBtn').textContent=state.dense?'Groß':'Kompakt'};
   $('theme').onclick=updateTheme;$('language').onclick=toggleLanguage;
   $('now').onclick=openLiveSearch;$('heroDiscover').onclick=openQuickDiscover;$('accountBtn').onclick=showAccount;
@@ -402,8 +411,8 @@ function bind(){const acc=readJSON(accountKey,null);if(acc)$('accountBtn').query
   window.addEventListener('popstate',()=>{if($('eventModal').open)$('eventModal').close()});
   let y0=null;$('preview').addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});$('preview').addEventListener('touchend',e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>80)closePreview();y0=null},{passive:true});
   $('saveSearchBtn').onclick=saveSearch;$('savedSearchesBtn').onclick=showSavedSearches;$('saved').onclick=showFavorites;$('profile').onclick=showAccount;$('navSearch').onclick=()=>document.querySelector('.discoveryShell').scrollIntoView({behavior:'smooth'});
-  $('cityMapBtn').onclick=()=>setView('map');document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('surpriseBtn').onclick=surpriseMe;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
-  $('privacyLink').onclick=showPrivacy;$('privacyBtnTop').onclick=openConsent;$('cookieLink').onclick=openConsent;$('organizerBtn').onclick=organizerDemo;
+  $('cityMapBtn').onclick=()=>setView('map');document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('inspirationBtn').onclick=openInspiration;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
+  $('privacyLink').onclick=showPrivacy;$('cookieLink').onclick=openConsent;$('organizerBtn').onclick=organizerDemo;$('installAppBtn').onclick=showInstallHelp;
   $('consentSettings').onclick=openConsent;$('consentNecessary').onclick=()=>saveConsent({personalization:false,map:false,media:false});$('consentAll').onclick=()=>saveConsent({personalization:true,map:true,media:true});$('saveConsent').onclick=()=>saveConsent({personalization:$('consentPersonalization').checked,map:$('consentMap').checked,media:$('consentMedia').checked});$('acceptAllModal').onclick=()=>saveConsent({personalization:true,map:true,media:true});
 }
 

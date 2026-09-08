@@ -4,9 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#15131a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="NXTUP">
   <meta name="description" content="NXTUP — Find what's next. Events in Europa entdecken.">
   <title>NXTUP — Find what's next.</title>
   <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -17,17 +23,16 @@
       <span class="brandGlyph">NX</span><span class="brandWord">NXTUP</span>
     </a>
     <form id="citySearch" class="searchShell" role="search">
-      <span class="searchIcon" aria-hidden="true">⌕</span>
+      
       <input id="place" list="citySuggestions" value="Karlsruhe" autocomplete="off" aria-label="Stadt, Ort oder PLZ" placeholder="Stadt, Ort oder PLZ in Europa">
       <datalist id="citySuggestions"></datalist>
       <button class="searchSubmit" type="submit">Suchen</button>
-      <button id="locate" class="locationBtn" type="button" aria-label="Aktuellen Standort verwenden">◎ <b>Mein Standort</b></button>
+      <button id="locate" class="locationBtn" type="button">Mein Standort</button>
     </form>
     <div class="topActions">
       <button id="language" class="textIconBtn" type="button" aria-label="Sprache wechseln">DE</button>
-      <button id="theme" class="iconBtn" type="button" aria-label="Hell-/Dunkelmodus">◐</button>
-      <button id="accountBtn" class="accountBtn" type="button" aria-label="Anmelden oder Profil erstellen"><span>○</span><b>Anmelden</b><small>Profil erstellen</small></button>
-      <button id="privacyBtnTop" class="iconBtn" type="button" aria-label="Datenschutzeinstellungen">⚙</button>
+      <button id="theme" class="iconBtn" type="button" aria-label="Hell-/Dunkelmodus">Theme</button>
+      <button id="accountBtn" class="accountBtn" type="button" aria-label="Anmelden oder Profil erstellen"><b>Anmelden</b><small>Profil erstellen</small></button>
     </div>
   </header>
 
@@ -36,10 +41,10 @@
       <div class="heroGlow heroGlowA"></div><div class="heroGlow heroGlowB"></div>
       <div class="heroCopy">
         <p class="eyebrow" id="heroLocation">KARLSRUHE · 50 KM</p>
-        <button id="heroDiscover" class="heroDiscover" type="button" aria-label="Quick Discover öffnen"><span class="heroTitle">Find what’s <span>next.</span></span><em>Entdecken →</em></button>
+        <button id="heroDiscover" class="heroDiscover" type="button" aria-label="Entdecken öffnen"><span class="heroTitle">Find what’s <span>next.</span></span><em>Entdecken</em></button>
         <p class="heroText">Events in ganz Europa entdecken — von Techno bis Theater, von Street Food bis Stadtfest.</p>
         <div class="heroActions">
-          <button id="now" class="primaryAction" type="button"><span class="bolt">↗</span><span><small>Spontan los?</small><strong>Was geht jetzt?</strong></span></button>
+          <button id="now" class="primaryAction" type="button"><span><small>LIVE</small><strong>Was geht jetzt?</strong></span></button>
           <span class="heroHint"><b id="heroCount">0</b> passende Events</span>
         </div>
       </div>
@@ -53,20 +58,20 @@
 
     <section class="cityMode" aria-label="City Mode">
       <div class="cityModeCard">
-        <div class="cityModeTop"><div><p class="kicker">CITY MODE</p><h2 id="cityModeTitle">Karlsruhe</h2><p><b id="cityModeCount">0</b> Ideen für deinen nächsten Move.</p></div><button id="cityMapBtn" class="ghostBtn" type="button">Auf Karte entdecken →</button></div>
+        <div class="cityModeTop"><div><p class="kicker">CITY MODE</p><h2 id="cityModeTitle">Karlsruhe</h2><p><b id="cityModeCount">0</b> Ideen für deinen nächsten Move.</p></div><button id="cityMapBtn" class="ghostBtn" type="button">Auf Karte entdecken</button></div>
         <div class="cityChips"><button class="cityChip" data-cityfilter="trending">Trending</button><button class="cityChip" data-cityfilter="today">Heute</button><button class="cityChip" data-cityfilter="weekend">Wochenende</button><button class="cityChip" data-cityfilter="free">Kostenlos</button><button class="cityChip" data-cityfilter="nightlife">Nightlife</button><button class="cityChip" data-cityfilter="food">Food</button><button class="cityChip" data-cityfilter="culture">Kultur</button></div>
       </div>
     </section>
 
     <section class="smartTools" aria-label="NXTUP Plus">
-      <article class="smartBox premiumBox"><p class="kicker">INSPIRATION</p><h3>Für dich ausgewählt</h3><p>Persönliche Vorschläge passend zu Ort, Zeit, Budget, Interessen und Lieblingslocations.</p><div class="smartActions"><button id="surpriseBtn" class="smartAction" type="button">Inspiration öffnen →</button></div></article>
-      <article class="smartBox premiumBox"><p class="kicker">PLAN MY WEEKEND</p><h3>Wochenende planen</h3><p>NXTUP+ stellt automatisch Ideen für Freitag, Samstag und Sonntag zusammen.</p><div class="smartActions"><button id="weekendPlanBtn" class="smartAction" type="button">Plan erstellen →</button></div></article>
+      <article class="smartBox premiumBox"><p class="kicker">INSPIRATION</p><h3>Für dich ausgewählt</h3><p>Persönliche Vorschläge passend zu Ort, Zeit, Budget, Interessen und Lieblingslocations.</p><div class="smartActions"><button id="inspirationBtn" class="smartAction" type="button">Inspiration öffnen</button></div></article>
+      <article class="smartBox premiumBox"><p class="kicker">PLAN MY WEEKEND</p><h3>Wochenende planen</h3><p>NXTUP+ stellt automatisch Ideen für Freitag, Samstag und Sonntag zusammen.</p><div class="smartActions"><button id="weekendPlanBtn" class="smartAction" type="button">Plan erstellen</button></div></article>
     </section>
 
     <section class="discoveryShell" aria-label="Eventfilter">
       <div class="sectionIntro">
         <div><p class="kicker">ENTDECKEN</p><h2>Was passt zu dir?</h2></div>
-        <div class="introActions"><button id="savedSearchesBtn" class="ghostBtn" type="button">Gespeicherte Suchen</button><button id="saveSearchBtn" class="ghostBtn" type="button">＋ Suche speichern</button></div>
+        <div class="introActions"><button id="savedSearchesBtn" class="ghostBtn" type="button">Gespeicherte Suchen</button><button id="saveSearchBtn" class="ghostBtn" type="button">Suche speichern</button></div>
       </div>
 
       <div class="quickRow" id="quickRow">
@@ -80,11 +85,11 @@
         <select id="type" class="selectChip" aria-label="Eventart"><option value="">Alle Eventarten</option></select>
         <select id="genre" class="selectChip" aria-label="Genre"><option value="">Alle Genres</option></select>
         <label class="fieldChip radiusChip"><span>Radius</span><select id="radius"><option value="5">5 km</option><option value="10">10 km</option><option value="25">25 km</option><option value="50" selected>50 km</option><option value="100">100 km</option><option value="city">Stadt</option><option value="map">Kartenausschnitt</option></select></label>
-        <button id="more" class="quickChip filterButton" type="button">＋ Weitere Filter</button>
+        <button id="more" class="quickChip filterButton" type="button">Weitere Filter</button>
       </div>
 
       <div id="activeFilters" class="activeFilters" aria-live="polite"></div>
-      <div class="discoverySearchRow"><button id="mainFilterSearch" class="discoverySearchBtn" type="button">Events suchen</button></div>
+      <div class="discoverySearchRow"><button id="mainFilterSearch" class="discoverySearchBtn" type="button"><strong>Events anzeigen</strong><span id="searchButtonHint">Filter anwenden und Ergebnisse öffnen</span></button></div>
 
       <section id="morePanel" class="morePanel hidden" aria-label="Weitere Filter">
         <div class="panelHead"><strong>Weitere Filter</strong><button id="closeFilters" class="closeMini" type="button" aria-label="Filter schließen">×</button></div>
@@ -100,7 +105,7 @@
       </section>
     </section>
 
-    <section class="recommendations" aria-label="Empfehlungen">
+    <section id="recommendations" class="recommendations" aria-label="Empfehlungen">
       <div class="recommendationHead"><div><p class="kicker">NXTUP+</p><h2>Dein nächster Move <span class="premiumTag">PREMIUM</span></h2></div><button id="toggleRecommendations" class="ghostBtn" type="button">Empfehlungen ausblenden</button></div>
       <div id="recommendationRail" class="recommendationRail"></div>
     </section>
@@ -124,7 +129,7 @@
         <div id="map" class="map" aria-label="Eventkarte"><div id="heatLegend" class="heatLegend hidden">Heatmap · je stärker, desto mehr Events</div>
           <div id="mapFallback" class="mapFallback">
             <div class="mapFallbackCard">
-              <span class="mapGlyph">⌖</span><h2>Interaktive Karte aktivieren</h2>
+              <h2>Interaktive Karte aktivieren</h2>
               <p>Die Karte lädt Inhalte von OpenStreetMap. Erst nach deiner Zustimmung werden externe Kartendaten abgerufen.</p>
               <button id="enableMap" class="ctaSmall" type="button">Karte aktivieren</button>
             </div>
@@ -134,15 +139,15 @@
         <div class="floatingMapControls" aria-label="Kartensteuerung">
           <button id="zoomIn" type="button" title="Hineinzoomen">＋</button>
           <button id="zoomOut" type="button" title="Herauszoomen">−</button>
-          <button id="mapLocate" type="button" title="Mein Standort">◎</button>
-          <button id="resetMap" type="button" title="Zur Stadt zurück">↺</button>
-          <button id="fullscreenMap" type="button" title="Vollbild">⛶</button>
+          <button id="mapLocate" type="button" title="Mein Standort">GPS</button>
+          <button id="resetMap" type="button" title="Zur Stadt zurück">Reset</button>
+          <button id="fullscreenMap" type="button" title="Vollbild">Full</button>
         </div>
         <button id="searchMapArea" class="searchMapArea" type="button">In diesem Kartenausschnitt suchen</button>
       </div>
       <aside id="preview" class="preview empty" aria-live="polite">
         <button id="closePreview" class="closePanel" type="button" aria-label="Vorschau schließen">×</button>
-        <div class="emptyState"><span>↗</span><strong>Pick your next move.</strong><p>Wähle einen Pin oder ein Event aus.</p></div>
+        <div class="emptyState"><strong>Pick your next move.</strong><p>Wähle einen Pin oder ein Event aus.</p></div>
       </aside>
     </section>
 
@@ -152,24 +157,24 @@
   </main>
 
   <nav class="mobileNav" aria-label="Hauptnavigation">
-    <button class="active" data-nav="discover" type="button"><b>⌖</b><span>Entdecken</span></button>
-    <button id="navNow" type="button"><b>•</b><span>Jetzt</span></button>
-    <button id="navSearch" type="button"><b>⌕</b><span>Events</span></button>
-    <button id="saved" type="button"><b>♡</b><span>Merkliste</span></button>
-    <button id="profile" type="button"><b>○</b><span>Profil</span></button>
+    <button class="active" data-nav="discover" type="button"><span>Entdecken</span></button>
+    <button id="navNow" type="button"><span>Jetzt</span></button>
+    <button id="navSearch" type="button"><span>Events</span></button>
+    <button id="saved" type="button"><span>Merkliste</span></button>
+    <button id="profile" type="button"><span>Profil</span></button>
   </nav>
 
   <footer class="footer">
     <div><strong>NXTUP</strong><span>Find what's next.</span></div>
-    <nav><button id="privacyLink" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieLink" type="button">Cookie-/Datenschutz-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button></nav>
-    <small><b class="versionBadge">NXTUP v6</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
+    <nav><button id="privacyLink" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieLink" type="button">Cookie-/Datenschutz-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button><button id="installAppBtn" type="button">App installieren</button></nav>
+    <small><b class="versionBadge">NXTUP v7</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
   </footer>
 
   <dialog id="eventModal" class="modal"><button class="close" id="closeModal" type="button" aria-label="Schließen">×</button><div id="modalBody"></div></dialog>
   <dialog id="genericModal" class="modal"><button class="close" id="closeGeneric" type="button" aria-label="Schließen">×</button><div id="genericBody"></div></dialog>
 
   <div id="consentBanner" class="consentBanner hidden" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-    <div class="consentCopy"><span class="privacyIcon">◉</span><div><strong id="consentTitle">Deine Privatsphäre bei NXTUP</strong><p>Notwendige Funktionen laufen ohne Tracking. Externe Karte/Medien und lokale Personalisierung aktivieren wir nur nach deiner Wahl.</p></div></div>
+    <div class="consentCopy"><div><strong id="consentTitle">Deine Privatsphäre bei NXTUP</strong><p>Notwendige Funktionen laufen ohne Tracking. Externe Karte/Medien und lokale Personalisierung aktivieren wir nur nach deiner Wahl.</p></div></div>
     <div class="consentActions"><button id="consentNecessary" class="ghostBtn" type="button">Nur notwendige</button><button id="consentSettings" class="ghostBtn" type="button">Einstellungen</button><button id="consentAll" class="ctaSmall" type="button">Alle akzeptieren</button></div>
   </div>
 
@@ -177,7 +182,7 @@
     <button class="close" id="closeConsent" type="button" aria-label="Schließen">×</button>
     <div class="consentModalBody">
       <p class="kicker">DATENSCHUTZ</p><h2>Du entscheidest.</h2>
-      <p class="muted">Du kannst deine Auswahl jederzeit über ⚙ oder den Footer ändern.</p>
+      <p class="muted">Du kannst deine Auswahl jederzeit über den Footer ändern.</p>
       <div class="consentOption fixed"><div><strong>Technisch notwendig</strong><p>Grundfunktionen, Sicherheit und aktuelle Sitzung. Immer aktiv.</p></div><span>Immer an</span></div>
       <label class="consentOption"><div><strong>Lokale Personalisierung</strong><p>Favoriten, Suchverlauf, gespeicherte Suchen und Darstellung werden nur auf diesem Gerät gespeichert.</p></div><input id="consentPersonalization" type="checkbox"></label>
       <label class="consentOption"><div><strong>Externe Karte</strong><p>OpenStreetMap-Kartenkacheln und bei Bedarf Geocoding. Dabei wird u. a. deine IP-Adresse an den Anbieter übertragen.</p></div><input id="consentMap" type="checkbox"></label>
