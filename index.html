@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#111116">
+  <title>NXTUP — Find what's next.</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="NXTUP Startseite">
+      <span class="brandGlyph">NX</span>
+      <span class="brandWord">NXTUP</span>
+    </a>
+    <div class="searchShell">
+      <span class="searchIcon">⌕</span>
+      <input id="place" value="Karlsruhe" aria-label="Ort oder PLZ" placeholder="Stadt, Ort oder PLZ">
+      <button id="locate" class="locationBtn" aria-label="Standort verwenden"><span>◎</span><b>Mein Standort</b></button>
+    </div>
+    <div class="topActions">
+      <span class="liveBadge"><i></i> LIVE</span>
+      <button id="theme" class="iconBtn" aria-label="Darstellung wechseln">◐</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="heroGlow heroGlowA"></div><div class="heroGlow heroGlowB"></div>
+      <div class="heroCopy">
+        <p class="eyebrow">KARLSRUHE · 50 KM</p>
+        <h1>Find what’s <span>next.</span></h1>
+        <p class="heroText">Konzerte, Clubs, Festivals, Food & mehr — entdecke, was heute und als Nächstes in deiner Nähe passiert.</p>
+        <div class="heroActions">
+          <button id="now" class="primaryAction"><span class="bolt">↗</span><span><small>Spontan los?</small><strong>Was geht jetzt?</strong></span></button>
+          <span class="heroHint"><b id="heroCount">8</b> Events in deiner Nähe</span>
+        </div>
+      </div>
+      <div class="heroVisual" aria-hidden="true">
+        <div class="poster posterOne"><span>FRI</span><b>12</b><small>RHEINHAFEN<br>OPEN AIR</small></div>
+        <div class="poster posterTwo"><span>SUN</span><b>13</b><small>STREET FOOD<br>FIESTA</small></div>
+        <div class="poster posterThree"><span>FRI</span><b>18</b><small>INDIE<br>NIGHT</small></div>
+        <div class="floatingTag tagA">TECHNO</div><div class="floatingTag tagB">FOOD</div><div class="floatingTag tagC">LIVE</div>
+      </div>
+    </section>
+
+    <section class="discoveryShell">
+      <div class="sectionIntro"><div><p class="kicker">ENTDECKEN</p><h2>Was passt zu dir?</h2></div><span>Filter kombinieren und direkt loslegen.</span></div>
+      <div class="quickRow">
+        <button class="quickChip activeSoft" data-quick="today">Heute</button>
+        <button class="quickChip" data-quick="weekend">Wochenende</button>
+        <label class="fieldChip"><span>Von</span><input id="from" type="date"></label>
+        <label class="fieldChip"><span>Bis</span><input id="to" type="date"></label>
+        <select id="type" class="selectChip"><option value="">Alle Eventarten</option></select>
+        <select id="genre" class="selectChip"><option value="">Alle Genres</option></select>
+        <label class="fieldChip radiusChip"><span>Radius</span><select id="radius"><option>5</option><option>10</option><option>20</option><option>30</option><option selected>50</option></select><b>km</b></label>
+        <button id="more" class="quickChip filterButton">＋ Mehr Filter</button>
+      </div>
+      <section id="morePanel" class="morePanel hidden">
+        <label class="togglePill"><input id="free" type="checkbox"><span>Free</span> Kostenlos</label>
+        <label class="togglePill"><input id="outdoor" type="checkbox"><span>Sun</span> Outdoor</label>
+        <label class="togglePill"><input id="indoor" type="checkbox"><span>In</span> Indoor</label>
+        <label class="miniField">Max. Preis <input id="maxPrice" type="number" min="0" placeholder="egal"><b>€</b></label>
+        <label class="miniField">Start ab <input id="startTime" type="time"></label>
+        <button id="reset" class="resetBtn">Zurücksetzen</button>
+      </section>
+    </section>
+
+    <section class="toolbar">
+      <div class="resultsText"><span class="pulseDot"></span><strong id="count">0 Events</strong><span id="context"> rund um Karlsruhe</span></div>
+      <div class="viewSwitch"><button id="mapBtn" class="active">Karte</button><button id="listBtn">Liste</button></div>
+    </section>
+
+    <section id="mapView" class="mapWrap">
+      <div id="map" class="map">
+        <div class="mapNoise"></div><div class="mapRiver"></div>
+        <div class="district d1">WESTSTADT</div><div class="district d2">SÜDSTADT</div><div class="district d3">DURLACH</div>
+        <div class="mapLabel"><b>KARLSRUHE</b><span>CITY CENTER</span></div>
+        <div id="pins"></div>
+        <div class="mapControls"><button>＋</button><button>−</button><button>◎</button></div>
+        <div class="mapNote"><span class="pulseDot"></span> Live Preview · Pins anklicken</div>
+      </div>
+      <aside id="preview" class="preview empty">
+        <div class="emptyState"><span>↗</span><strong>Pick your next move.</strong><p>Tippe auf einen Pin und entdecke das Event dahinter.</p></div>
+      </aside>
+    </section>
+
+    <section id="listView" class="list hidden"></section>
+  </main>
+
+  <nav class="mobileNav">
+    <button class="active"><b>⌖</b><span>Entdecken</span></button>
+    <button id="navSearch"><b>⌕</b><span>Suchen</span></button>
+    <button id="saved"><b>♡</b><span>Merkliste</span></button>
+    <button id="profile"><b>○</b><span>Profil</span></button>
+  </nav>
+
+  <dialog id="modal"><button class="close" id="closeModal">×</button><div id="modalBody"></div></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
