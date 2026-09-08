@@ -50,3 +50,6 @@
 .saveBtn{min-width:78px;width:auto;padding:0 12px;border-radius:999px;font-size:10px;font-weight:850}.recCard>span,.privacyIcon,.liveResultIcon{display:none!important}.mobileNav button b{display:none!important}.mobileNav button span{font-size:11px;margin-top:0}.floatingMapControls button{width:auto;min-width:42px;padding:0 9px;font-size:10px;font-weight:850}
 .footer{padding-bottom:calc(32px + env(safe-area-inset-bottom))}.topbar{padding-top:calc(14px + env(safe-area-inset-top))}
 @media(max-width:780px){.hero{min-height:330px;padding:28px 22px}.heroTitle{font-size:46px!important}.heroText{max-width:86%}.heroVisual{opacity:.42}.discoverySearchRow{position:sticky;bottom:72px;z-index:22;background:linear-gradient(180deg,transparent,var(--surface) 35%);padding-top:14px}.discoverySearchBtn{width:100%;min-width:0}.mobileNav{padding-bottom:calc(10px + env(safe-area-inset-bottom))}.topActions .accountBtn{min-width:108px}.topActions .iconBtn{min-width:48px;padding:0 10px}.footer{margin-bottom:64px}}
+
+.cityChip.active{background:var(--text);color:var(--surface);border-color:var(--text)}
+.cityResultsBtn{background:var(--text)!important;color:var(--surface)!important;border-color:var(--text)!important;min-width:150px}

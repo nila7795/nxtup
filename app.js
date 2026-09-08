@@ -125,7 +125,7 @@ window.showVenue=showVenue;
 
 const state={
   city:{...cities[0]}, view:'map', dense:false, recommendations:true, bounds:null, userLocation:null,
-  consent:{personalization:false,map:false,media:false}, map:null, mapReady:false, mapLoading:null, mapMarkers:[], language:'de', heatmap:false
+  consent:{personalization:false,map:false,media:false}, map:null, mapReady:false, mapLoading:null, mapMarkers:[], language:'de', heatmap:false, cityModeFilters:new Set()
 };
 
 const consentKey='nxtupConsentV1';
@@ -180,11 +180,22 @@ function withinBounds(e){
 }
 function filtered(){
   const r=selectedRadius();
+  const cf=state.cityModeFilters||new Set();
+  const today=toISO(APP_DATE);
+  const weekend=dateRange('weekend');
   return events.filter(e=>{
     const genre=$('genre').value;
     const geoOk=r==='map'?withinBounds(e):r==='city'?e.city===state.city.name:eventDistance(e)<=r;
     const genreOk=!genre||e.genre===genre||e.parentGenre===genre;
-    return geoOk&&(!$('type').value||e.type===$('type').value)&&genreOk&&(!$('from').value||e.date>=$('from').value)&&(!$('to').value||e.date<=$('to').value)&&(!$('free').checked||e.price===0)&&(!$('outdoor').checked||e.outdoor)&&(!$('indoor').checked||!e.outdoor)&&(!$('minPrice').value||e.price>=Number($('minPrice').value))&&(!$('maxPrice').value||e.price<=Number($('maxPrice').value))&&(!$('startTime').value||e.time>=$('startTime').value)&&(!$('age').value||e.age<=Number($('age').value));
+    const dateModes=[cf.has('today'),cf.has('weekend')];
+    const cityDateOk=!dateModes.some(Boolean) || (cf.has('today')&&e.date===today) || (cf.has('weekend')&&e.date>=weekend[0]&&e.date<=weekend[1]);
+    const categoryModes=[];
+    if(cf.has('nightlife'))categoryModes.push('Party / Club');
+    if(cf.has('food'))categoryModes.push('Food & Drink');
+    if(cf.has('culture'))categoryModes.push('Theater & Kultur');
+    const cityCategoryOk=!categoryModes.length||categoryModes.includes(e.type);
+    const cityFreeOk=!cf.has('free')||e.price===0;
+    return geoOk&&cityDateOk&&cityCategoryOk&&cityFreeOk&&(!$('type').value||e.type===$('type').value)&&genreOk&&(!$('from').value||e.date>=$('from').value)&&(!$('to').value||e.date<=$('to').value)&&(!$('free').checked||e.price===0)&&(!$('outdoor').checked||e.outdoor)&&(!$('indoor').checked||!e.outdoor)&&(!$('minPrice').value||e.price>=Number($('minPrice').value))&&(!$('maxPrice').value||e.price<=Number($('maxPrice').value))&&(!$('startTime').value||e.time>=$('startTime').value)&&(!$('age').value||e.age<=Number($('age').value));
   });
 }
 function sorted(es){
@@ -338,7 +349,7 @@ function organizerDemo(){showGeneric('Für Veranstalter','Später können Verans
 window.showGeneric=showGeneric;
 
 function setQuickDate(mode,btn){document.querySelectorAll('[data-date]').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');const [a,b]=dateRange(mode);$('from').value=a;$('to').value=b;render()}
-function resetFilters(){['type','genre','to','minPrice','maxPrice','startTime','age'].forEach(id=>$(id).value='');['free','outdoor','indoor'].forEach(id=>$(id).checked=false);$('radius').value='50';$('minPrice').value='0';$('from').value=toISO(APP_DATE);document.querySelectorAll('[data-date]').forEach(b=>b.classList.remove('active'));state.bounds=null;render()}
+function resetFilters(){['type','genre','to','minPrice','maxPrice','startTime','age'].forEach(id=>$(id).value='');['free','outdoor','indoor'].forEach(id=>$(id).checked=false);$('radius').value='50';$('minPrice').value='0';$('from').value=toISO(APP_DATE);document.querySelectorAll('[data-date]').forEach(b=>b.classList.remove('active'));document.querySelectorAll('[data-cityfilter]').forEach(b=>b.classList.remove('active'));state.cityModeFilters.clear();state.bounds=null;render()}
 
 function setupSelects(){
   [...new Set(events.map(e=>e.type))].sort().forEach(v=>$('type').add(new Option(v,v)));
@@ -349,15 +360,11 @@ function updateTheme(){document.body.classList.toggle('dark');$('theme').textCon
 function toggleLanguage(){state.language=state.language==='de'?'en':'de';$('language').textContent=state.language.toUpperCase();if(state.consent.personalization)localStorage.setItem(langKey,state.language);$('place').placeholder=state.language==='en'?'City, place or postcode in Europe':'Stadt, Ort oder PLZ in Europa';render()}
 
 function applyCityFilter(kind){
-  resetFilters();
-  if(kind==='today')setQuickDate('today');
-  if(kind==='weekend')setQuickDate('weekend');
-  if(kind==='free')$('free').checked=true;
-  if(kind==='nightlife')$('type').value='Party / Club';
-  if(kind==='food')$('type').value='Food & Drink';
-  if(kind==='culture')$('type').value='Theater & Kultur';
-  if(kind==='trending')$('sort').value='popular';
-  render();document.querySelector('.toolbar').scrollIntoView({behavior:'smooth'});
+  const btn=document.querySelector(`[data-cityfilter="${kind}"]`);
+  if(state.cityModeFilters.has(kind)){state.cityModeFilters.delete(kind);btn?.classList.remove('active')}
+  else{state.cityModeFilters.add(kind);btn?.classList.add('active')}
+  if(kind==='trending')$('sort').value=state.cityModeFilters.has('trending')?'popular':'relevance';
+  render();
 }
 function openInspiration(){showPremium('Persönliche Inspiration','NXTUP+ berücksichtigt deinen Ort, dein Budget, Interessen, Favoriten und Lieblingslocations und schlägt dir gezielt passende Events vor.')}
 function weekendPlan(){showPremium('Plan my Weekend','NXTUP+ plant dein Wochenende automatisch anhand von Stadt, Zeit, Interessen, Entfernung und Budget.')}
@@ -418,17 +425,15 @@ function bind(){const acc=readJSON(accountKey,null);if(acc)$('accountBtn').query
   window.addEventListener('popstate',()=>{if($('eventModal').open)$('eventModal').close()});
   let y0=null;$('preview').addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});$('preview').addEventListener('touchend',e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>80)closePreview();y0=null},{passive:true});
   $('saveSearchBtn').onclick=saveSearch;$('savedSearchesBtn').onclick=showSavedSearches;$('saved').onclick=showFavorites;$('profile').onclick=showAccount;$('navSearch').onclick=()=>document.querySelector('.discoveryShell').scrollIntoView({behavior:'smooth'});
-  $('cityMapBtn').onclick=async()=>{
+  $('cityMapBtn').onclick=()=>{
+    render();
+    setView('grid');
     const es=sorted(filtered());
-    setView('map');
-    document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});
-    if(!state.consent.map){
-      $('mapFallback').classList.remove('hidden');
-      return;
+    const toolbar=document.querySelector('.toolbar');
+    toolbar.scrollIntoView({behavior:'smooth',block:'start'});
+    if(!es.length){
+      setTimeout(()=>showGeneric('Keine passenden Events','Für diese City-Filter gibt es aktuell keine Treffer. Entferne einen Filter oder erweitere Zeitraum bzw. Radius.'),350);
     }
-    await ensureMap();
-    if(!state.mapReady)return;
-    fitMapToResults(es);
   };
   document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('inspirationBtn').onclick=openInspiration;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
   $('privacyLink').onclick=showPrivacy;$('cookieLink').onclick=openConsent;$('organizerBtn').onclick=organizerDemo;$('installAppBtn').onclick=showInstallHelp;
