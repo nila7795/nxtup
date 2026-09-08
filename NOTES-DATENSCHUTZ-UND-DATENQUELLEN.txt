@@ -1,0 +1,27 @@
+NXTUP — Hinweise für die nächste Produktivstufe
+================================================
+
+DSGVO / ePrivacy / TDDDG
+- Dieser Prototyp ist "Privacy by Default": keine Analytics-/Werbetracker.
+- Optionale lokale Personalisierung, externe Karte und externe Medien sind getrennt einwilligungsfähig.
+- Die Einwilligungsentscheidung selbst wird lokal gespeichert, damit sie nicht bei jedem Aufruf erneut abgefragt werden muss.
+- Standortzugriff läuft zusätzlich über die Browser-Berechtigung.
+- Vor kommerzieller Veröffentlichung müssen Datenschutzerklärung, Impressum, Verantwortlicher, Rechtsgrundlagen, Empfänger/Drittländer, Löschfristen usw. konkretisiert und rechtlich geprüft werden.
+
+Karte / Ortssuche
+- Leaflet wird erst nach Zustimmung geladen.
+- OpenStreetMap-Kartenkacheln werden erst nach Zustimmung abgerufen und mit Attribution angezeigt.
+- Nominatim wird nur bei einer aktiv abgeschickten Ortssuche genutzt, NICHT als Live-Autocomplete.
+- Für kommerzielle Skalierung später eigenen/gehosteten Karten- und Geocoding-Anbieter einsetzen; öffentliche OSMF-Dienste haben Nutzungsgrenzen und keine SLA.
+
+Eventbilder
+- app.js unterstützt imageUrl + imageCredit pro Event.
+- Externe imageUrl wird nur nach Einwilligung geladen.
+- Bevorzugte Produktionslösung: Bilder nur bei geklärtem Nutzungsrecht serverseitig übernehmen und auf eigener Infrastruktur/CDN hosten.
+- Bei fehlendem oder nicht erlaubtem Bild zeigt NXTUP automatisch eigenes Kategorie-Artwork.
+
+Eventquellen
+- Für Produktion: offizielle APIs/Feeds bevorzugen.
+- Scraping nur, wenn Nutzungsbedingungen und Recht dies erlauben.
+- Duplikate anhand Zeit, Titel, Venue, Koordinaten und Quelle zusammenführen.
+- Änderungen/Absagen priorisieren und Zeitstempel der letzten Prüfung speichern.

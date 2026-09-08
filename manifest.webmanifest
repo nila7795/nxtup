@@ -1,1 +1,10 @@
-{"name":"NXTUP — Find what's next.","short_name":"NXTUP","start_url":"./","display":"standalone","background_color":"#111015","theme_color":"#7c3aed","description":"Discover events around you."}
+{
+  "name":"NXTUP — Find what's next.",
+  "short_name":"NXTUP",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f4f2ef",
+  "theme_color":"#15131a",
+  "description":"Events in Europa entdecken — Karte, Filter, Kacheln und Listenansicht.",
+  "lang":"de"
+}
