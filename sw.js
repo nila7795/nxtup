@@ -1,4 +1,4 @@
-const CACHE='nxtup-v5';
+const CACHE='nxtup-v6';
 const CORE=['./','index.html','style.css','app.js','manifest.webmanifest','impressum.html'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)))});
 self.addEventListener('activate',e=>{e.waitUntil(Promise.all([clients.claim(),caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))]))});

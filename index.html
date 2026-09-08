@@ -54,13 +54,13 @@
     <section class="cityMode" aria-label="City Mode">
       <div class="cityModeCard">
         <div class="cityModeTop"><div><p class="kicker">CITY MODE</p><h2 id="cityModeTitle">Karlsruhe</h2><p><b id="cityModeCount">0</b> Ideen für deinen nächsten Move.</p></div><button id="cityMapBtn" class="ghostBtn" type="button">Auf Karte entdecken →</button></div>
-        <div class="cityChips"><button class="cityChip" data-cityfilter="trending">🔥 Trending</button><button class="cityChip" data-cityfilter="today">⚡ Heute</button><button class="cityChip" data-cityfilter="weekend">🎉 Wochenende</button><button class="cityChip" data-cityfilter="free">🆓 Kostenlos</button><button class="cityChip" data-cityfilter="nightlife">🎧 Nightlife</button><button class="cityChip" data-cityfilter="food">🍴 Food</button><button class="cityChip" data-cityfilter="culture">🎭 Kultur</button></div>
+        <div class="cityChips"><button class="cityChip" data-cityfilter="trending">Trending</button><button class="cityChip" data-cityfilter="today">Heute</button><button class="cityChip" data-cityfilter="weekend">Wochenende</button><button class="cityChip" data-cityfilter="free">Kostenlos</button><button class="cityChip" data-cityfilter="nightlife">Nightlife</button><button class="cityChip" data-cityfilter="food">Food</button><button class="cityChip" data-cityfilter="culture">Kultur</button></div>
       </div>
     </section>
 
-    <section class="smartTools" aria-label="Smarte Entdeckung">
-      <article class="smartBox"><p class="kicker">SURPRISE ME</p><h3>🎲 Überrasch mich</h3><p>Ein Klick, ein passender Vorschlag aus Ort, Zeit, Entfernung und deinen aktuellen Filtern.</p><div class="smartActions"><button id="surpriseBtn" class="smartAction" type="button">Mein NXTUP finden →</button></div></article>
-      <article class="smartBox"><p class="kicker">PLAN MY WEEKEND</p><h3>✨ Wochenende planen</h3><p>NXTUP stellt automatisch Ideen für Freitag, Samstag und Sonntag zusammen.</p><div class="smartActions"><button id="weekendPlanBtn" class="smartAction" type="button">Wochenende planen →</button></div></article>
+    <section class="smartTools" aria-label="NXTUP Plus">
+      <article class="smartBox premiumBox"><p class="kicker">INSPIRATION</p><h3>Für dich ausgewählt</h3><p>Persönliche Vorschläge passend zu Ort, Zeit, Budget, Interessen und Lieblingslocations.</p><div class="smartActions"><button id="surpriseBtn" class="smartAction" type="button">Inspiration öffnen →</button></div></article>
+      <article class="smartBox premiumBox"><p class="kicker">PLAN MY WEEKEND</p><h3>Wochenende planen</h3><p>NXTUP+ stellt automatisch Ideen für Freitag, Samstag und Sonntag zusammen.</p><div class="smartActions"><button id="weekendPlanBtn" class="smartAction" type="button">Plan erstellen →</button></div></article>
     </section>
 
     <section class="discoveryShell" aria-label="Eventfilter">
@@ -84,6 +84,7 @@
       </div>
 
       <div id="activeFilters" class="activeFilters" aria-live="polite"></div>
+      <div class="discoverySearchRow"><button id="mainFilterSearch" class="discoverySearchBtn" type="button">Events suchen</button></div>
 
       <section id="morePanel" class="morePanel hidden" aria-label="Weitere Filter">
         <div class="panelHead"><strong>Weitere Filter</strong><button id="closeFilters" class="closeMini" type="button" aria-label="Filter schließen">×</button></div>
@@ -91,7 +92,7 @@
           <label class="togglePill"><input id="free" type="checkbox"> Kostenlos</label>
           <label class="togglePill"><input id="outdoor" type="checkbox"> Outdoor</label>
           <label class="togglePill"><input id="indoor" type="checkbox"> Indoor</label>
-          <label class="miniField">Max. Preis <input id="maxPrice" type="number" min="0" inputmode="decimal" placeholder="egal"><b>€</b></label>
+          <div class="priceRange"><label class="miniField">Preis ab <input id="minPrice" type="number" min="0" inputmode="decimal" value="0"><b>€</b></label><label class="miniField">Preis bis <input id="maxPrice" type="number" min="0" inputmode="decimal" placeholder="egal"><b>€</b></label></div>
           <label class="miniField">Start ab <input id="startTime" type="time"></label>
           <label class="miniField">Mindestalter <select id="age"><option value="">egal</option><option value="0">alle</option><option value="16">16+</option><option value="18">18+</option></select></label>
         </div>
@@ -100,7 +101,7 @@
     </section>
 
     <section class="recommendations" aria-label="Empfehlungen">
-      <div class="recommendationHead"><div><p class="kicker">INSPIRATION</p><h2>Für deinen nächsten Move</h2></div><button id="toggleRecommendations" class="ghostBtn" type="button">Empfehlungen ausblenden</button></div>
+      <div class="recommendationHead"><div><p class="kicker">NXTUP+</p><h2>Dein nächster Move <span class="premiumTag">PREMIUM</span></h2></div><button id="toggleRecommendations" class="ghostBtn" type="button">Empfehlungen ausblenden</button></div>
       <div id="recommendationRail" class="recommendationRail"></div>
     </section>
 
@@ -120,7 +121,7 @@
 
     <section id="mapView" class="mapWrap">
       <div class="mapPane">
-        <div id="map" class="map" aria-label="Eventkarte"><div id="heatLegend" class="heatLegend hidden">🔥 Heatmap · je stärker, desto mehr Events</div>
+        <div id="map" class="map" aria-label="Eventkarte"><div id="heatLegend" class="heatLegend hidden">Heatmap · je stärker, desto mehr Events</div>
           <div id="mapFallback" class="mapFallback">
             <div class="mapFallbackCard">
               <span class="mapGlyph">⌖</span><h2>Interaktive Karte aktivieren</h2>
@@ -152,7 +153,7 @@
 
   <nav class="mobileNav" aria-label="Hauptnavigation">
     <button class="active" data-nav="discover" type="button"><b>⌖</b><span>Entdecken</span></button>
-    <button id="navNow" type="button"><b>⚡</b><span>Jetzt</span></button>
+    <button id="navNow" type="button"><b>•</b><span>Jetzt</span></button>
     <button id="navSearch" type="button"><b>⌕</b><span>Events</span></button>
     <button id="saved" type="button"><b>♡</b><span>Merkliste</span></button>
     <button id="profile" type="button"><b>○</b><span>Profil</span></button>
@@ -161,7 +162,7 @@
   <footer class="footer">
     <div><strong>NXTUP</strong><span>Find what's next.</span></div>
     <nav><button id="privacyLink" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieLink" type="button">Cookie-/Datenschutz-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button></nav>
-    <small><b class="versionBadge">NXTUP v5</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
+    <small><b class="versionBadge">NXTUP v6</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
   </footer>
 
   <dialog id="eventModal" class="modal"><button class="close" id="closeModal" type="button" aria-label="Schließen">×</button><div id="modalBody"></div></dialog>
