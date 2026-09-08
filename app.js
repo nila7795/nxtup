@@ -287,6 +287,13 @@ function renderMapMarkers(es){
     m.on('click',()=>g.length>1?state.map.setView([lat,lng],Math.min(18,z+2)):preview(g[0].id));state.mapMarkers.push(m);
   });
 }
+function fitMapToResults(es=sorted(filtered())){
+  if(!state.mapReady)return;
+  if(!es.length){state.map.setView([state.city.lat,state.city.lng],12);return}
+  if(es.length===1){state.map.setView([es[0].lat,es[0].lng],14);return}
+  const bounds=L.latLngBounds(es.map(e=>[e.lat,e.lng]));
+  state.map.fitBounds(bounds,{padding:[48,48],maxZoom:14});
+}
 function centerMap(){if(state.mapReady)state.map.setView([state.city.lat,state.city.lng],12)}
 
 async function chooseCity(query){
@@ -411,7 +418,19 @@ function bind(){const acc=readJSON(accountKey,null);if(acc)$('accountBtn').query
   window.addEventListener('popstate',()=>{if($('eventModal').open)$('eventModal').close()});
   let y0=null;$('preview').addEventListener('touchstart',e=>{y0=e.touches[0].clientY},{passive:true});$('preview').addEventListener('touchend',e=>{if(y0!==null&&e.changedTouches[0].clientY-y0>80)closePreview();y0=null},{passive:true});
   $('saveSearchBtn').onclick=saveSearch;$('savedSearchesBtn').onclick=showSavedSearches;$('saved').onclick=showFavorites;$('profile').onclick=showAccount;$('navSearch').onclick=()=>document.querySelector('.discoveryShell').scrollIntoView({behavior:'smooth'});
-  $('cityMapBtn').onclick=()=>setView('map');document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('inspirationBtn').onclick=openInspiration;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
+  $('cityMapBtn').onclick=async()=>{
+    const es=sorted(filtered());
+    setView('map');
+    document.querySelector('.toolbar').scrollIntoView({behavior:'smooth',block:'start'});
+    if(!state.consent.map){
+      $('mapFallback').classList.remove('hidden');
+      return;
+    }
+    await ensureMap();
+    if(!state.mapReady)return;
+    fitMapToResults(es);
+  };
+  document.querySelectorAll('[data-cityfilter]').forEach(b=>b.onclick=()=>applyCityFilter(b.dataset.cityfilter));$('inspirationBtn').onclick=openInspiration;$('weekendPlanBtn').onclick=weekendPlan;$('navNow').onclick=()=>$('now').click();$('pinsMode').onclick=()=>toggleHeatmap(false);$('heatMode').onclick=()=>toggleHeatmap(true);
   $('privacyLink').onclick=showPrivacy;$('cookieLink').onclick=openConsent;$('organizerBtn').onclick=organizerDemo;$('installAppBtn').onclick=showInstallHelp;
   $('consentSettings').onclick=openConsent;$('consentNecessary').onclick=()=>saveConsent({personalization:false,map:false,media:false});$('consentAll').onclick=()=>saveConsent({personalization:true,map:true,media:true});$('saveConsent').onclick=()=>saveConsent({personalization:$('consentPersonalization').checked,map:$('consentMap').checked,media:$('consentMedia').checked});$('acceptAllModal').onclick=()=>saveConsent({personalization:true,map:true,media:true});
 }

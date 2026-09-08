@@ -1,4 +1,4 @@
-NXTUP v7 — iOS PWA Prototype
+NXTUP v8 — iOS PWA Prototype
 
 INSTALLATION AUF IPHONE / IPAD
 1. Die Dateien müssen über HTTPS ausgeliefert werden. Ein Doppelklick auf index.html als file:// reicht für Service Worker/PWA nicht aus.
@@ -11,7 +11,7 @@ ENTHALTEN
 - apple-touch-icon.png (180x180)
 - PWA-Icons 192x192 und 512x512
 - manifest.webmanifest mit standalone/scope/start_url
-- Service Worker nxtup-v7 mit Cache-Update
+- Service Worker nxtup-v8 mit Cache-Update
 - iOS Safe-Area CSS
 - apple-mobile-web-app Metadaten
 
