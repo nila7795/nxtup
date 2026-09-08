@@ -3,194 +3,142 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#15131a">
+  <meta name="theme-color" content="#0c0d0f">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NXTUP">
-  <meta name="description" content="NXTUP — Find what's next. Events in Europa entdecken.">
   <title>NXTUP — Find what's next.</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <a class="skipLink" href="#main">Zum Inhalt</a>
-
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="NXTUP Startseite">
-      <span class="brandGlyph">NX</span><span class="brandWord">NXTUP</span>
-    </a>
-    <form id="citySearch" class="searchShell" role="search">
-      
-      <input id="place" list="citySuggestions" value="Karlsruhe" autocomplete="off" aria-label="Stadt, Ort oder PLZ" placeholder="Stadt, Ort oder PLZ in Europa">
-      <datalist id="citySuggestions"></datalist>
-      <button class="searchSubmit" type="submit">Suchen</button>
-      <button id="locate" class="locationBtn" type="button">Mein Standort</button>
-    </form>
-    <div class="topActions">
-      <button id="language" class="textIconBtn" type="button" aria-label="Sprache wechseln">DE</button>
-      <button id="theme" class="iconBtn" type="button" aria-label="Hell-/Dunkelmodus">Theme</button>
-      <button id="accountBtn" class="accountBtn" type="button" aria-label="Anmelden oder Profil erstellen"><b>Anmelden</b><small>Profil erstellen</small></button>
-    </div>
-  </header>
-
-  <main id="main">
-    <section class="hero">
-      <div class="heroGlow heroGlowA"></div><div class="heroGlow heroGlowB"></div>
-      <div class="heroCopy">
-        <p class="eyebrow" id="heroLocation">KARLSRUHE · 50 KM</p>
-        <button id="heroDiscover" class="heroDiscover" type="button" aria-label="Entdecken öffnen"><span class="heroTitle">Find what’s <span>next.</span></span><em>Entdecken</em></button>
-        <p class="heroText">Events in ganz Europa entdecken — von Techno bis Theater, von Street Food bis Stadtfest.</p>
-        <div class="heroActions">
-          <button id="now" class="primaryAction" type="button"><span><small>LIVE</small><strong>Was geht jetzt?</strong></span></button>
-          <span class="heroHint"><b id="heroCount">0</b> passende Events</span>
-        </div>
-      </div>
-      <div class="heroVisual" aria-hidden="true">
-        <div class="poster posterOne"><span>TONIGHT</span><b>NX</b><small>DISCOVER<br>YOUR CITY</small></div>
-        <div class="poster posterTwo"><span>EUROPE</span><b>UP</b><small>FOOD · MUSIC<br>CULTURE</small></div>
-        <div class="poster posterThree"><span>LIVE</span><b>24</b><small>WHAT'S<br>NEXT?</small></div>
-        <div class="floatingTag tagA">TECHNO</div><div class="floatingTag tagB">FOOD</div><div class="floatingTag tagC">LIVE</div>
-      </div>
-    </section>
-
-    <section class="cityMode" aria-label="City Mode">
-      <div class="cityModeCard">
-        <div class="cityModeTop"><div><p class="kicker">CITY MODE</p><h2 id="cityModeTitle">Karlsruhe</h2><p><b id="cityModeCount">0</b> Ideen für deinen nächsten Move.</p></div><button id="cityMapBtn" class="ghostBtn cityResultsBtn" type="button">Events anzeigen</button></div>
-        <div class="cityChips"><button class="cityChip" data-cityfilter="trending">Trending</button><button class="cityChip" data-cityfilter="today">Heute</button><button class="cityChip" data-cityfilter="weekend">Wochenende</button><button class="cityChip" data-cityfilter="free">Kostenlos</button><button class="cityChip" data-cityfilter="nightlife">Nightlife</button><button class="cityChip" data-cityfilter="food">Food</button><button class="cityChip" data-cityfilter="culture">Kultur</button></div>
-      </div>
-    </section>
-
-    <section class="smartTools" aria-label="NXTUP Plus">
-      <article class="smartBox premiumBox"><p class="kicker">INSPIRATION</p><h3>Für dich ausgewählt</h3><p>Persönliche Vorschläge passend zu Ort, Zeit, Budget, Interessen und Lieblingslocations.</p><div class="smartActions"><button id="inspirationBtn" class="smartAction" type="button">Inspiration öffnen</button></div></article>
-      <article class="smartBox premiumBox"><p class="kicker">PLAN MY WEEKEND</p><h3>Wochenende planen</h3><p>NXTUP+ stellt automatisch Ideen für Freitag, Samstag und Sonntag zusammen.</p><div class="smartActions"><button id="weekendPlanBtn" class="smartAction" type="button">Plan erstellen</button></div></article>
-    </section>
-
-    <section class="discoveryShell" aria-label="Eventfilter">
-      <div class="sectionIntro">
-        <div><p class="kicker">ENTDECKEN</p><h2>Was passt zu dir?</h2></div>
-        <div class="introActions"><button id="savedSearchesBtn" class="ghostBtn" type="button">Gespeicherte Suchen</button><button id="saveSearchBtn" class="ghostBtn" type="button">Suche speichern</button></div>
-      </div>
-
-      <div class="quickRow" id="quickRow">
-        <button class="quickChip" data-date="today" type="button">Heute</button>
-        <button class="quickChip" data-date="tomorrow" type="button">Morgen</button>
-        <button class="quickChip" data-date="weekend" type="button">Dieses Wochenende</button>
-        <button class="quickChip" data-date="nextweekend" type="button">Nächstes Wochenende</button>
-        <button class="quickChip" data-date="month" type="button">Dieser Monat</button>
-        <label class="fieldChip"><span>Von</span><input id="from" type="date"></label>
-        <label class="fieldChip"><span>Bis</span><input id="to" type="date"></label>
-        <select id="type" class="selectChip" aria-label="Eventart"><option value="">Alle Eventarten</option></select>
-        <select id="genre" class="selectChip" aria-label="Genre"><option value="">Alle Genres</option></select>
-        <label class="fieldChip radiusChip"><span>Radius</span><select id="radius"><option value="5">5 km</option><option value="10">10 km</option><option value="25">25 km</option><option value="50" selected>50 km</option><option value="100">100 km</option><option value="city">Stadt</option><option value="map">Kartenausschnitt</option></select></label>
-        <button id="more" class="quickChip filterButton" type="button">Weitere Filter</button>
-      </div>
-
-      <div id="activeFilters" class="activeFilters" aria-live="polite"></div>
-      <div class="discoverySearchRow"><button id="mainFilterSearch" class="discoverySearchBtn" type="button"><strong>Events anzeigen</strong><span id="searchButtonHint">Filter anwenden und Ergebnisse öffnen</span></button></div>
-
-      <section id="morePanel" class="morePanel hidden" aria-label="Weitere Filter">
-        <div class="panelHead"><strong>Weitere Filter</strong><button id="closeFilters" class="closeMini" type="button" aria-label="Filter schließen">×</button></div>
-        <div class="filterGrid">
-          <label class="togglePill"><input id="free" type="checkbox"> Kostenlos</label>
-          <label class="togglePill"><input id="outdoor" type="checkbox"> Outdoor</label>
-          <label class="togglePill"><input id="indoor" type="checkbox"> Indoor</label>
-          <div class="priceRange"><label class="miniField">Preis ab <input id="minPrice" type="number" min="0" inputmode="decimal" value="0"><b>€</b></label><label class="miniField">Preis bis <input id="maxPrice" type="number" min="0" inputmode="decimal" placeholder="egal"><b>€</b></label></div>
-          <label class="miniField">Start ab <input id="startTime" type="time"></label>
-          <label class="miniField">Mindestalter <select id="age"><option value="">egal</option><option value="0">alle</option><option value="16">16+</option><option value="18">18+</option></select></label>
-        </div>
-        <div class="panelFooter"><button id="reset" class="resetBtn" type="button">Alles zurücksetzen</button><button id="applyFilters" class="ctaSmall" type="button">Ergebnisse anzeigen</button></div>
-      </section>
-    </section>
-
-    <section id="recommendations" class="recommendations" aria-label="Empfehlungen">
-      <div class="recommendationHead"><div><p class="kicker">NXTUP+</p><h2>Dein nächster Move <span class="premiumTag">PREMIUM</span></h2></div><button id="toggleRecommendations" class="ghostBtn" type="button">Empfehlungen ausblenden</button></div>
-      <div id="recommendationRail" class="recommendationRail"></div>
-    </section>
-
-    <section class="toolbar" aria-label="Ergebnisse steuern">
-      <div class="resultsText"><span class="pulseDot"></span><strong id="count">0 Events</strong><span id="context"> rund um Karlsruhe</span></div>
-      <div class="toolbarRight">
-        <label class="sortControl">Sortieren <select id="sort"><option value="relevance">Relevant</option><option value="distance">Entfernung</option><option value="date">Datum</option><option value="price">Preis</option><option value="popular">Beliebtheit</option><option value="new">Neu hinzugefügt</option></select></label>
-        <button id="densityBtn" class="ghostBtn" type="button" aria-pressed="false">Kompakt</button>
-        <div class="viewSwitch" role="group" aria-label="Darstellung">
-          <button id="mapBtn" class="active" type="button">Karte</button>
-          <button id="gridBtn" type="button">Kacheln</button>
-          <button id="listBtn" type="button">Liste</button>
-          <button id="splitBtn" class="desktopOnly" type="button">Split</button>
-        </div>
-      </div>
-    </section>
-
-    <section id="mapView" class="mapWrap">
-      <div class="mapPane">
-        <div id="map" class="map" aria-label="Eventkarte"><div id="heatLegend" class="heatLegend hidden">Heatmap · je stärker, desto mehr Events</div>
-          <div id="mapFallback" class="mapFallback">
-            <div class="mapFallbackCard">
-              <h2>Interaktive Karte aktivieren</h2>
-              <p>Die Karte lädt Inhalte von OpenStreetMap. Erst nach deiner Zustimmung werden externe Kartendaten abgerufen.</p>
-              <button id="enableMap" class="ctaSmall" type="button">Karte aktivieren</button>
-            </div>
-          </div>
-        </div>
-        <div class="mapModeToggle"><button id="pinsMode" class="active" type="button">Pins</button><button id="heatMode" type="button">Heatmap</button></div>
-        <div class="floatingMapControls" aria-label="Kartensteuerung">
-          <button id="zoomIn" type="button" title="Hineinzoomen">＋</button>
-          <button id="zoomOut" type="button" title="Herauszoomen">−</button>
-          <button id="mapLocate" type="button" title="Mein Standort">GPS</button>
-          <button id="resetMap" type="button" title="Zur Stadt zurück">Reset</button>
-          <button id="fullscreenMap" type="button" title="Vollbild">Full</button>
-        </div>
-        <button id="searchMapArea" class="searchMapArea" type="button">In diesem Kartenausschnitt suchen</button>
-      </div>
-      <aside id="preview" class="preview empty" aria-live="polite">
-        <button id="closePreview" class="closePanel" type="button" aria-label="Vorschau schließen">×</button>
-        <div class="emptyState"><strong>Pick your next move.</strong><p>Wähle einen Pin oder ein Event aus.</p></div>
-      </aside>
-    </section>
-
-    <section id="gridView" class="eventGrid hidden" aria-label="Eventkacheln"></section>
-    <section id="listView" class="eventList hidden" aria-label="Eventliste"></section>
-    <section id="splitView" class="splitView hidden" aria-label="Geteilte Kartenansicht"><div id="splitList" class="splitList"></div><div id="splitMap" class="splitMap"><p>Karte wird über die Kartenansicht synchronisiert.</p></div></section>
-  </main>
-
-  <nav class="mobileNav" aria-label="Hauptnavigation">
-    <button class="active" data-nav="discover" type="button"><span>Entdecken</span></button>
-    <button id="navNow" type="button"><span>Jetzt</span></button>
-    <button id="navSearch" type="button"><span>Events</span></button>
-    <button id="saved" type="button"><span>Merkliste</span></button>
-    <button id="profile" type="button"><span>Profil</span></button>
-  </nav>
-
-  <footer class="footer">
-    <div><strong>NXTUP</strong><span>Find what's next.</span></div>
-    <nav><button id="privacyLink" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieLink" type="button">Cookie-/Datenschutz-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button><button id="installAppBtn" type="button">App installieren</button></nav>
-    <small><b class="versionBadge">NXTUP v9</b> · Prototyp · Eventdaten teilweise Demo · © <span id="year"></span> NXTUP</small>
-  </footer>
-
-  <dialog id="eventModal" class="modal"><button class="close" id="closeModal" type="button" aria-label="Schließen">×</button><div id="modalBody"></div></dialog>
-  <dialog id="genericModal" class="modal"><button class="close" id="closeGeneric" type="button" aria-label="Schließen">×</button><div id="genericBody"></div></dialog>
-
-  <div id="consentBanner" class="consentBanner hidden" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
-    <div class="consentCopy"><div><strong id="consentTitle">Deine Privatsphäre bei NXTUP</strong><p>Notwendige Funktionen laufen ohne Tracking. Externe Karte/Medien und lokale Personalisierung aktivieren wir nur nach deiner Wahl.</p></div></div>
-    <div class="consentActions"><button id="consentNecessary" class="ghostBtn" type="button">Nur notwendige</button><button id="consentSettings" class="ghostBtn" type="button">Einstellungen</button><button id="consentAll" class="ctaSmall" type="button">Alle akzeptieren</button></div>
+<header class="topbar">
+  <button class="brand" id="homeBtn" type="button" aria-label="NXTUP Startseite">
+    <span class="logoDynamic"><span class="logoN">N</span><span class="logoX">X</span><span class="logoTUP">TUP</span></span>
+  </button>
+  <form class="globalSearch" id="globalSearchForm">
+    <input id="globalSearch" autocomplete="off" placeholder="Events, Städte oder Locations suchen" aria-label="Events, Städte oder Locations suchen">
+    <button type="submit">Suchen</button>
+  </form>
+  <div class="topActions">
+    <button id="languageBtn" class="headerBtn" type="button">DE</button>
+    <button id="themeBtn" class="headerBtn" type="button">Dunkel</button>
+    <button id="loginBtn" class="headerLink" type="button">Anmelden</button>
+    <button id="registerBtn" class="accountBtn" type="button">Profil erstellen</button>
   </div>
+</header>
 
-  <dialog id="consentModal" class="consentModal">
-    <button class="close" id="closeConsent" type="button" aria-label="Schließen">×</button>
-    <div class="consentModalBody">
-      <p class="kicker">DATENSCHUTZ</p><h2>Du entscheidest.</h2>
-      <p class="muted">Du kannst deine Auswahl jederzeit über den Footer ändern.</p>
-      <div class="consentOption fixed"><div><strong>Technisch notwendig</strong><p>Grundfunktionen, Sicherheit und aktuelle Sitzung. Immer aktiv.</p></div><span>Immer an</span></div>
-      <label class="consentOption"><div><strong>Lokale Personalisierung</strong><p>Favoriten, Suchverlauf, gespeicherte Suchen und Darstellung werden nur auf diesem Gerät gespeichert.</p></div><input id="consentPersonalization" type="checkbox"></label>
-      <label class="consentOption"><div><strong>Externe Karte</strong><p>OpenStreetMap-Kartenkacheln und bei Bedarf Geocoding. Dabei wird u. a. deine IP-Adresse an den Anbieter übertragen.</p></div><input id="consentMap" type="checkbox"></label>
-      <label class="consentOption"><div><strong>Externe Eventmedien</strong><p>Externe Bild-URLs werden nur geladen, wenn du zustimmst. Bevorzugt nutzt NXTUP künftig lokal gespeicherte, lizenzierte Eventbilder.</p></div><input id="consentMedia" type="checkbox"></label>
-      <div class="consentModalActions"><button id="saveConsent" class="ctaSmall" type="button">Auswahl speichern</button><button id="acceptAllModal" class="ghostBtn" type="button">Alle aktivieren</button></div>
+<main>
+  <section class="hero" id="hero" tabindex="0" role="button" aria-label="Zu Events springen">
+    <div class="heroCopy">
+      <p class="eyebrow">NXTUP · EUROPA</p>
+      <h1>Find what's <span>next.</span></h1>
+      <p>Entdecke Events, Clubs, Festivals, Märkte, Kultur und mehr — in deiner Stadt oder irgendwo in Europa.</p>
+      <div class="heroActions">
+        <button id="discoverBtn" class="primaryBtn" type="button">Events entdecken</button>
+        <button id="nowBtn" class="secondaryBtn" type="button">Was geht jetzt?</button>
+      </div>
     </div>
-  </dialog>
+  </section>
 
-  <script src="app.js"></script>
+  <section class="cityMode" id="cityMode">
+    <div class="sectionHead">
+      <div>
+        <p class="kicker">CITY MODE</p>
+        <h2 id="cityModeTitle">Karlsruhe</h2>
+        <p id="cityModeSubtitle">Alle Events in Karlsruhe entdecken.</p>
+      </div>
+      <button id="changeCityBtn" class="ghostBtn" type="button">Stadt ändern</button>
+    </div>
+    <div class="citySearchRow">
+      <input id="citySearch" value="Karlsruhe" placeholder="Stadt oder Ort in Europa">
+      <button id="citySearchBtn" class="primaryBtn" type="button">Stadt laden</button>
+    </div>
+    <div class="cityFilterGroup" aria-label="City Mode Filter">
+      <button class="cityFilter" data-cityfilter="today" type="button">Heute</button>
+      <button class="cityFilter" data-cityfilter="weekend" type="button">Dieses Wochenende</button>
+      <button class="cityFilter" data-cityfilter="free" type="button">Kostenlos</button>
+      <button class="cityFilter" data-cityfilter="nightlife" type="button">Clubs & Nightlife</button>
+      <button class="cityFilter" data-cityfilter="concerts" type="button">Konzerte</button>
+      <button class="cityFilter" data-cityfilter="festivals" type="button">Festivals</button>
+      <button class="cityFilter" data-cityfilter="food" type="button">Food & Drinks</button>
+      <button class="cityFilter" data-cityfilter="culture" type="button">Kultur</button>
+    </div>
+    <div class="cityActions">
+      <button id="cityShowBtn" class="primaryBtn wide" type="button">Events anzeigen</button>
+      <button id="cityResetBtn" class="textBtn" type="button">Filter zurücksetzen</button>
+    </div>
+  </section>
+
+  <section class="discover" id="discover">
+    <div class="sectionHead compactHead">
+      <div><p class="kicker">ENTDECKEN</p><h2>Was passt zu dir?</h2></div>
+      <button id="savedSearchBtn" class="ghostBtn" type="button">Suche speichern</button>
+    </div>
+    <div class="filterBar">
+      <label><span>Ort</span><input id="place" value="Karlsruhe"></label>
+      <label><span>Von</span><input id="from" type="date"></label>
+      <label><span>Bis</span><input id="to" type="date"></label>
+      <label><span>Eventart</span><select id="type"><option value="">Alle</option></select></label>
+      <label><span>Genre</span><select id="genre"><option value="">Alle</option></select></label>
+      <label><span>Radius</span><select id="radius"><option value="city">Stadt</option><option value="5">5 km</option><option value="10">10 km</option><option value="25">25 km</option><option value="50" selected>50 km</option><option value="100">100 km</option></select></label>
+    </div>
+    <div class="quickFilters">
+      <button id="freeBtn" class="quickFilter" type="button">Kostenlos</button>
+      <label class="priceBox"><span>Preis</span><input id="minPrice" type="number" min="0" value="0"><b>bis</b><input id="maxPrice" type="number" min="0" placeholder="egal"><b>€</b></label>
+      <button id="outdoorBtn" class="quickFilter" type="button">Outdoor</button>
+      <button id="indoorBtn" class="quickFilter" type="button">Indoor</button>
+      <button id="clearFiltersBtn" class="textBtn" type="button">Zurücksetzen</button>
+    </div>
+    <button id="mainSearchBtn" class="searchCta" type="button"><strong>Events anzeigen</strong><span>Auswahl anwenden und Ergebnisse öffnen</span></button>
+  </section>
+
+  <section class="premiumStrip" id="premiumStrip">
+    <div><p class="kicker">NXTUP+</p><h2>Mehr aus deiner Zeit machen.</h2><p>Plan my Weekend, dein nächster Move und Benachrichtigungen für Lieblingslocations.</p></div>
+    <button id="premiumBtn" class="premiumBtn" type="button">3 Tage kostenlos testen</button>
+  </section>
+
+  <section class="toolbar" id="resultsTop">
+    <div><strong id="count">0 Events</strong><span id="context"> in Karlsruhe</span></div>
+    <div class="toolbarActions">
+      <label>Sortieren <select id="sort"><option value="relevance">Relevant</option><option value="date">Datum</option><option value="price">Preis</option><option value="popular">Beliebtheit</option></select></label>
+      <div class="viewSwitch"><button id="mapBtn" type="button">Karte</button><button id="gridBtn" class="active" type="button">Kacheln</button><button id="listBtn" type="button">Liste</button></div>
+    </div>
+  </section>
+
+  <section id="gridView" class="eventGrid"></section>
+  <section id="listView" class="eventList hidden"></section>
+  <section id="mapView" class="mapLayout hidden">
+    <div class="mapPane">
+      <div id="map" class="map">
+        <div id="mapFallback" class="mapFallback"><div><h3>Interaktive Karte</h3><p>Für die externe Karte ist deine Zustimmung erforderlich.</p><button id="enableMap" class="primaryBtn" type="button">Karte aktivieren</button></div></div>
+      </div>
+      <div class="mapControls"><button id="zoomIn" type="button">+</button><button id="zoomOut" type="button">−</button><button id="mapReset" type="button">Reset</button></div>
+    </div>
+    <aside id="preview" class="preview empty"><div class="emptyPreview"><strong>Event auswählen</strong><p>Klicke auf einen Pin oder ein Event.</p></div></aside>
+  </section>
+
+  <section class="inspiration" id="inspiration">
+    <div class="sectionHead compactHead"><div><p class="kicker">INSPIRATION</p><h2>Vielleicht ist das dein nächstes Event.</h2></div><span class="premiumTag">NXTUP+ personalisiert</span></div>
+    <div id="inspirationRail" class="inspirationRail"></div>
+  </section>
+</main>
+
+<nav class="mobileNav">
+  <button data-nav="home" type="button">Home</button><button data-nav="discover" type="button">Entdecken</button><button data-nav="city" type="button">City Mode</button><button id="mobileSaved" type="button">Favoriten</button><button id="mobileProfile" type="button">Profil</button>
+</nav>
+
+<footer class="footer">
+  <div class="footerBrand"><span class="logoDynamic small"><span class="logoN">N</span><span class="logoX">X</span><span class="logoTUP">TUP</span></span><span>Find what's next.</span></div>
+  <nav><button id="privacyBtn" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieBtn" type="button">Cookie-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button></nav>
+  <small>NXTUP v10 · Prototyp · Eventdaten teilweise Demo</small>
+</footer>
+
+<dialog id="eventModal"><button class="closeBtn" data-close="eventModal" type="button">×</button><div id="eventModalBody"></div></dialog>
+<dialog id="genericModal"><button class="closeBtn" data-close="genericModal" type="button">×</button><div id="genericModalBody"></div></dialog>
+<div id="consentBanner" class="consentBanner hidden"><div><strong>Datenschutz bei NXTUP</strong><p>Notwendige Funktionen laufen ohne Tracking. Externe Karte und lokale Personalisierung nur nach deiner Wahl.</p></div><div><button id="necessaryConsent" class="ghostBtn" type="button">Nur notwendige</button><button id="allConsent" class="primaryBtn" type="button">Alle akzeptieren</button></div></div>
+
+<script src="app.js"></script>
 </body>
 </html>
