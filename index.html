@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#0c0d0f">
+  <meta name="theme-color" content="#ff6b6b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="NXTUP">
@@ -15,7 +15,7 @@
 <body>
 <header class="topbar">
   <button class="brand" id="homeBtn" type="button" aria-label="NXTUP Startseite">
-    <span class="logoDynamic"><span class="logoN">N</span><span class="logoX">X</span><span class="logoTUP">TUP</span></span>
+    <span class="logoClassic">NXTUP</span>
   </button>
   <form class="globalSearch" id="globalSearchForm">
     <input id="globalSearch" autocomplete="off" placeholder="Events, Städte oder Locations suchen" aria-label="Events, Städte oder Locations suchen">
@@ -103,7 +103,7 @@
     <div><strong id="count">0 Events</strong><span id="context"> in Karlsruhe</span></div>
     <div class="toolbarActions">
       <label>Sortieren <select id="sort"><option value="relevance">Relevant</option><option value="date">Datum</option><option value="price">Preis</option><option value="popular">Beliebtheit</option></select></label>
-      <div class="viewSwitch"><button id="mapBtn" type="button">Karte</button><button id="gridBtn" class="active" type="button">Kacheln</button><button id="listBtn" type="button">Liste</button></div>
+      <div class="viewSwitch"><button id="mapBtn" type="button">Karte</button><button id="gridBtn" class="active" type="button">Kacheln</button><button id="listBtn" type="button">Liste</button><button id="splitBtn" class="desktopOnly" type="button">Split</button></div>
     </div>
   </section>
 
@@ -126,15 +126,16 @@
 </main>
 
 <nav class="mobileNav">
-  <button data-nav="home" type="button">Home</button><button data-nav="discover" type="button">Entdecken</button><button data-nav="city" type="button">City Mode</button><button id="mobileSaved" type="button">Favoriten</button><button id="mobileProfile" type="button">Profil</button>
+  <button data-nav="home" type="button">Home</button><button data-nav="discover" type="button">Entdecken</button><button data-nav="map" type="button">Karte</button><button id="mobileSaved" type="button">Favoriten</button><button id="mobileProfile" type="button">Profil</button>
 </nav>
 
 <footer class="footer">
-  <div class="footerBrand"><span class="logoDynamic small"><span class="logoN">N</span><span class="logoX">X</span><span class="logoTUP">TUP</span></span><span>Find what's next.</span></div>
+  <div class="footerBrand"><span class="logoClassic small">NXTUP</span><span>Find what's next.</span></div>
   <nav><button id="privacyBtn" type="button">Datenschutz</button><a href="impressum.html">Impressum</a><button id="cookieBtn" type="button">Cookie-Einstellungen</button><button id="organizerBtn" type="button">Für Veranstalter</button></nav>
-  <small>NXTUP v10 · Prototyp · Eventdaten teilweise Demo</small>
+  <small>NXTUP Classic Sunset v11 · Prototyp · Eventdaten teilweise Demo</small>
 </footer>
 
+<aside id="eventDrawer" class="eventDrawer hidden" aria-label="Eventdetails"><button id="drawerClose" class="closeBtn" type="button">×</button><div id="eventDrawerBody"></div></aside>
 <dialog id="eventModal"><button class="closeBtn" data-close="eventModal" type="button">×</button><div id="eventModalBody"></div></dialog>
 <dialog id="genericModal"><button class="closeBtn" data-close="genericModal" type="button">×</button><div id="genericModalBody"></div></dialog>
 <div id="consentBanner" class="consentBanner hidden"><div><strong>Datenschutz bei NXTUP</strong><p>Notwendige Funktionen laufen ohne Tracking. Externe Karte und lokale Personalisierung nur nach deiner Wahl.</p></div><div><button id="necessaryConsent" class="ghostBtn" type="button">Nur notwendige</button><button id="allConsent" class="primaryBtn" type="button">Alle akzeptieren</button></div></div>
