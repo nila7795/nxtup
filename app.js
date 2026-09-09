@@ -63,6 +63,57 @@ const venues = [
   { name: 'Paradiso', city: 'Amsterdam', type: 'Venue' }
 ];
 
+
+/* ---------- Echte Eventdaten ---------- */
+// data/events.json wird dreimal täglich von GitHub Actions aus dem
+// Veranstaltungskalender der Stadt Karlsruhe (CC0) erzeugt.
+const realCities = new Set();
+async function loadRealEvents() {
+  let data;
+  try {
+    const r = await fetch('data/events.json', { cache: 'no-store' });
+    if (!r.ok) throw 0;
+    data = await r.json();
+  } catch {
+    return; // Ohne Datei bleiben die Beispieldaten stehen.
+  }
+  if (!data.events?.length) return;
+
+  const cities = new Set(data.events.map(e => e.city));
+  cities.forEach(c => realCities.add(c));
+  // Beispieldaten der betroffenen Städte entfernen.
+  for (let i = events.length - 1; i >= 0; i--) {
+    if (cities.has(events[i].city)) events.splice(i, 1);
+  }
+  data.events.forEach(e => events.push({
+    id: seq++,
+    name: e.title,
+    description: e.description || '',
+    type: e.category,
+    genre: '',
+    price: e.price,
+    outdoor: null,
+    date: e.date,
+    time: e.time,
+    city: e.city,
+    country: e.country,
+    place: e.venue || e.city,
+    lat: e.lat,
+    lng: e.lng,
+    popularity: 50,
+    url: e.url,
+    sources: [e.source]
+  }));
+  state.dataUpdated = data.updated;
+  markRealData();
+}
+function markRealData() {
+  const list = [...realCities].join(', ');
+  $('demoBar').innerHTML = `<span><b>Echte Events für ${esc(list)}.</b> Andere Städte zeigen weiterhin Beispieldaten.</span><button id="demoBarInfo" type="button">Mehr</button>`;
+  $('demoBarInfo').onclick = () => showGeneric('Woher kommen die Daten?',
+    `Die Events für ${list} stammen aus dem offiziellen Veranstaltungskalender der Stadt Karlsruhe und werden mehrmals täglich automatisch abgeholt. Für alle anderen Städte zeigt NXTUP noch Beispieldaten.`);
+}
+
 /* ---------- Zustand ---------- */
 const VIEW_KEY = 'nxtupViewV12', FAV_KEY = 'nxtupFavV12', THEME_KEY = 'nxtupThemeV12', CONSENT_KEY = 'nxtupConsentV12';
 const read = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } };
@@ -82,11 +133,12 @@ const favs = () => read(FAV_KEY, []);
 const isFav = id => favs().includes(id);
 
 /* ---------- Helfer ---------- */
-const dateObj = e => new Date(`${e.date}T${e.time}:00`);
+const dateObj = e => new Date(`${e.date}T${e.time || '00:00'}:00`);
 const isLive = e => { const s = dateObj(e).getTime(); return Date.now() >= s && Date.now() <= s + 5 * 3600000 };
 const startsSoon = e => { const d = (dateObj(e) - Date.now()) / 3600000; return d > 0 && d <= 3 };
-const priceLabel = e => e.price ? `${e.price} €` : 'Kostenlos';
+const priceLabel = e => e.price === 0 ? 'Kostenlos' : e.price ? `${e.price} €` : 'Preis beim Veranstalter';
 function status(e) {
+  if (!e.time) return new Date(e.date + 'T12:00').toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: 'short' }) + ' · ganztägig';
   if (isLive(e)) return 'LIVE';
   if (startsSoon(e)) return 'STARTET BALD';
   return new Date(e.date + 'T12:00').toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: 'short' });
@@ -117,9 +169,12 @@ function matches(e) {
   if (genre && e.genre !== genre) return false;
   const min = Number($('minPrice').value || 0);
   const max = $('maxPrice').value === '' ? Infinity : Number($('maxPrice').value);
-  if (e.price < min || e.price > max) return false;
-  if (state.space === 'outdoor' && !e.outdoor) return false;
-  if (state.space === 'indoor' && e.outdoor) return false;
+  // Ist der Preis unbekannt, filtern wir ihn nicht weg.
+  if (e.price !== null && e.price !== undefined && (e.price < min || e.price > max)) return false;
+  if (e.outdoor !== null && e.outdoor !== undefined) {
+    if (state.space === 'outdoor' && !e.outdoor) return false;
+    if (state.space === 'indoor' && e.outdoor) return false;
+  }
   return true;
 }
 function sortList(list) {
@@ -145,7 +200,7 @@ function setResults(list, label = '') {
 function cover(e) {
   return `<div class="eventImage ${COVER[e.type] || 'c3'}">
     <span class="status">${esc(status(e))}</span>
-    <span class="eventType">${esc(e.type)}</span>
+    ${e.genre ? `<span class="eventType">${esc(e.type)}</span>` : ''}
     <span class="coverWord">${esc(e.genre || e.type)}</span>
     <button class="favBtn ${isFav(e.id) ? 'saved' : ''}" data-fav="${e.id}" type="button" aria-label="Merken">${isFav(e.id) ? '♥' : '♡'}</button>
   </div>`;
@@ -154,7 +209,7 @@ function card(e, list = false) {
   return `<article class="eventCard ${list ? 'listCard' : ''}" data-event="${e.id}" tabindex="0">
     ${cover(e)}
     <div class="cardBody"><h3>${esc(e.name)}</h3><p>${esc(e.place)} · ${esc(e.city)}</p>
-    <div class="metaRow"><span>${esc(e.time)} Uhr</span><span>${esc(priceLabel(e))}</span>${e.genre ? `<span>${esc(e.genre)}</span>` : ''}</div></div>
+    <div class="metaRow"><span>${e.time ? esc(e.time) + ' Uhr' : 'ganztägig'}</span><span>${esc(priceLabel(e))}</span>${e.genre ? `<span>${esc(e.genre)}</span>` : ''}</div></div>
   </article>`;
 }
 function emptyBox() {
@@ -211,16 +266,18 @@ function detail(e) {
     <p>${esc(e.place)} · ${esc(e.city)}, ${esc(e.country)}</p>
     <div class="detailMeta">
       <span>${esc(new Date(e.date + 'T12:00').toLocaleDateString('de-DE', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' }))}</span>
-      <span>${esc(e.time)} Uhr</span><span>${esc(priceLabel(e))}</span><span>${esc(e.genre || e.type)}</span>
+      <span>${e.time ? esc(e.time) + ' Uhr' : 'ganztägig'}</span><span>${esc(priceLabel(e))}</span><span>${esc(e.genre || e.type)}</span>
     </div>
     <div class="detailActions">
       <button class="primaryAction ${isFav(e.id) ? 'saved' : ''}" data-fav="${e.id}" type="button">${isFav(e.id) ? '♥ Gemerkt' : '♡ Merken'}</button>
+      ${e.url ? `<a target="_blank" rel="noopener" href="${esc(e.url)}">Zur Veranstaltung</a>` : ''}
       <a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(e.lat + ',' + e.lng)}">Route</a>
       <button type="button" data-share="${e.id}">Teilen</button>
     </div>
-    <div class="demoNote">Dies ist ein Beispiel-Event aus dem Prototyp. Es gibt dafür keinen Ticketverkauf und keine Veranstalterseite.</div>
-    <h3>Über das Event</h3>
-    <p>NXTUP soll später Eventinformationen aus mehreren Quellen zu einem Eintrag zusammenführen. In dieser Version sind alle Daten Beispieldaten.</p>
+    ${e.url ? '' : '<div class="demoNote">Beispiel-Event aus dem Prototyp. Dafür gibt es keine echte Veranstaltungsseite.</div>'}
+    ${e.description ? `<h3>Über das Event</h3><p>${esc(e.description)}</p>` : ''}
+    <h3>Quelle</h3>
+    <p>${e.sources.map(esc).join(' · ')}</p>
   </div>`;
 }
 function wireDetail(root, e) {
@@ -273,6 +330,7 @@ function setCity(city) {
   $('citySearch').value = city.name;
   $('cityModeTitle').textContent = city.name;
   $('cityModeSubtitle').textContent = `Alle Events in ${city.name} entdecken.`;
+  fillSelects();
   applyFilters();
   if (state.mapReady) centerMap();
 }
@@ -315,10 +373,13 @@ function resetFilters() {
 
 /* ---------- Ansichten ---------- */
 function fillSelects() {
-  const types = [...new Set(templates.map(t => t[1]))].sort();
-  const genres = [...new Set(templates.map(t => t[2]).filter(Boolean))].sort();
+  const pool = events.filter(e => e.city === state.city.name);
+  const types = [...new Set(pool.map(e => e.type))].sort();
+  const genres = [...new Set(pool.map(e => e.genre).filter(Boolean))].sort();
   $('type').innerHTML = '<option value="">Alle</option>' + types.map(x => `<option>${esc(x)}</option>`).join('');
   $('genre').innerHTML = '<option value="">Alle</option>' + genres.map(x => `<option>${esc(x)}</option>`).join('');
+  // Ohne Genres in den Daten hat das Feld keinen Zweck.
+  $('genre').closest('label').classList.toggle('hidden', genres.length === 0);
 }
 function setView(v) {
   state.view = v;
@@ -448,11 +509,12 @@ function initTheme() {
 }
 
 /* ---------- Start ---------- */
-function init() {
-  fillSelects();
+async function init() {
   $('from').value = iso(TODAY);
   initTheme();
   initConsent();
+  await loadRealEvents();
+  fillSelects();
   applyFilters();
   setView(state.view);
 

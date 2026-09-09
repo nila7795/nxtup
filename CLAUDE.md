@@ -55,8 +55,29 @@ auch Treffer haben. Pro Stadt sind Event 1 immer LIVE und Event 2 startet bald.
 
 **Das ist die Stelle, die beim Anschluss echter Daten ersetzt wird.**
 
+## Echte Daten (Stand: Schritt 1 erledigt)
+Quelle 1 ist angebunden: der Veranstaltungskalender der Stadt Karlsruhe
+(https://kalender.karlsruhe.de/db/termine/rss, Lizenz CC0).
+
+- `scripts/fetch_events.py` holt den Feed, korrigiert die kaputte Zeitzone (+0018),
+  ordnet eigene Kategorien zu, geokodiert Orte über Nominatim und schreibt
+  `data/events.json`.
+- `.github/workflows/events.yml` startet das dreimal täglich über GitHub Actions
+  und committet das Ergebnis zurück ins Repo.
+- Der Feed reicht nur etwa eine Woche voraus. Bekannte Events bleiben deshalb
+  gespeichert, Vergangenes wird beim Lauf entfernt.
+- `data/venues.json` ist der Geokodierungs-Cache. Jeder Ort wird genau einmal
+  bei Nominatim abgefragt.
+- Die App lädt `data/events.json` beim Start. Fehlt oder leer, greifen die
+  Beispieldaten.
+
+Bekannte Grenzen dieser Quelle: keine Bilder, keine Preise (nur "kostenlos"
+wird aus dem Text erkannt), keine Koordinaten (daher Geokodierung), und die
+Rubriken des Feeds sind unbrauchbar (eigene Zuordnung in `categorise()`).
+
 ## Offene Aufgaben
-1. Echte Eventquellen anbinden. Größter Brocken, siehe unten.
+1. Ticketmaster Discovery API als zweite Quelle (kostenloser Key, 5000 Abrufe/Tag,
+   Partnerprogramm für Provisionen).
 2. Backend und Konten, sobald Favoriten geräteübergreifend gelten sollen.
 3. Veranstalter-Zugang: eigene Events einstellen, Location verwalten, Platzierung buchen.
 4. Datenschutzerklärung juristisch fertigstellen. Aktuell steht dort ein Platzhalter.
