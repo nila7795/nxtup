@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-10T08:23:32+02:00",
+ "updated": "2026-09-10T14:22:25+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 316,
+ "count": 323,
  "events": [
   {
    "id": "ka-566788",
@@ -1121,6 +1121,24 @@
    "geoExact": true
   },
   {
+   "id": "ka-584998",
+   "source": "Stadt Karlsruhe",
+   "title": "Kunst der Chormusik",
+   "description": "Junger Kammerchor Braunschweig",
+   "date": "2026-09-12",
+   "time": "19:30",
+   "timeLabel": "19.30 Uhr",
+   "venue": "Stadtkirche Durlach",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/kunst_der_chormusik-1",
+   "lat": 48.998859,
+   "lng": 8.471353,
+   "geoExact": true
+  },
+  {
    "id": "ka-584038",
    "source": "Stadt Karlsruhe",
    "title": "ES WAR ZWANZIG VOR NEUN",
@@ -2088,6 +2106,24 @@
    "category": "Messe",
    "price": null,
    "url": "https://kalender.karlsruhe.de/db/termine/messen_und_kongresse/apply_innovate",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-572549",
+   "source": "Stadt Karlsruhe",
+   "title": "Wandern für Seniorinnen und Senioren",
+   "description": "Mittwochswandern im Schwarzwaldverein Karlsruhe e.V.",
+   "date": "2026-09-16",
+   "time": "08:50",
+   "timeLabel": "8.50  bis  15 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Sport",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/sportveranstaltung/wandern_fur_seniorinnen_und_senioren-12",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
@@ -3569,6 +3605,24 @@
    "geoExact": true
   },
   {
+   "id": "ka-584990",
+   "source": "Stadt Karlsruhe",
+   "title": "Intensiv Farbe",
+   "description": "– Marie-Hélène H.-Desrue, Sarah Esslinger-Dahlmann, Hartmut Häcker und Monika Ziemer",
+   "date": "2026-09-19",
+   "time": null,
+   "timeLabel": "",
+   "venue": "BBK Künstlerhaus",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/ausstellungen/intensiv_farbe",
+   "lat": 49.007938,
+   "lng": 8.414071,
+   "geoExact": true
+  },
+  {
    "id": "ka-582067",
    "source": "Stadt Karlsruhe",
    "title": "Kinzigtäler Jakobsweg - Etappe 3",
@@ -3747,6 +3801,24 @@
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
+  },
+  {
+   "id": "ka-584997",
+   "source": "Stadt Karlsruhe",
+   "title": "💧 Crowd-Recherche: Nitrat im Wasser aufdecken!",
+   "description": "Gemeinsam unser Wasser schützen – macht mit bei der Nitrat-Recherche in Karlsruhe und Umgebung!",
+   "date": "2026-09-19",
+   "time": "11:00",
+   "timeLabel": "11  bis  15 Uhr",
+   "venue": "Friedrichsplatz",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Vortrag",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/wirtschaft/crowd_recherche_nitrat_im_wasser_aufdecken",
+   "lat": 49.00788,
+   "lng": 8.400757,
+   "geoExact": true
   },
   {
    "id": "ka-584076",
@@ -5027,6 +5099,24 @@
    "geoExact": true
   },
   {
+   "id": "ka-584989",
+   "source": "Stadt Karlsruhe",
+   "title": "Karlsruhe spielt!",
+   "description": "Spiel- und Mitmachaktion für Kinder, Familien und alle Karlsruher*innen",
+   "date": "2026-09-22",
+   "time": null,
+   "timeLabel": "",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/karlsruhe_spielt",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-576520",
    "source": "Stadt Karlsruhe",
    "title": "Sprechstunde: Einfach digital!",
@@ -5691,6 +5781,42 @@
    "lat": 49.004425,
    "lng": 8.431709,
    "geoExact": true
+  },
+  {
+   "id": "ka-584650",
+   "source": "Stadt Karlsruhe",
+   "title": "Ethik für Innovationen: Wie gelingt ethische Innovation im 21. Jahrhundert?",
+   "description": "Tagung der Deutschen UNESCO-Kommission anlässlich ihres 75. Jubiläums",
+   "date": "2026-09-24",
+   "time": "10:00",
+   "timeLabel": "10  bis  12.30 Uhr",
+   "venue": "Zentrum für Kunst und Medien (ZKM) |  Medientheater",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/messen_und_kongresse/ethik_fur_innovationen_wie_gelingt_ethische",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-584334",
+   "source": "Stadt Karlsruhe",
+   "title": "Vom kleinen Maulwurf, der wissen wollte, wer ihm auf den Kopf gemacht hat (ab 3)",
+   "description": "Nach dem bekannten Kinderbuch von Wolf Erlbruch",
+   "date": "2026-09-24",
+   "time": "10:00",
+   "timeLabel": "10  bis  10.40 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/vom_kleinen_maulwurf_der_wissen_wollte-61",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   }
  ]
 }
