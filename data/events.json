@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-11T08:21:49+02:00",
+ "updated": "2026-09-11T14:22:47+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 349,
+ "count": 350,
  "events": [
   {
    "id": "ka-566788",
@@ -6285,6 +6285,24 @@
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
+  },
+  {
+   "id": "ka-583795",
+   "source": "Stadt Karlsruhe",
+   "title": "Genuss: lateinamerikanische Gastronomie mit regionalen Produkten",
+   "description": "Anlässlich des 20-jährigen Jubiläums lädt das El Tesoro zu Musik und lateinamerikanischer Gastronomie ein.",
+   "date": "2026-09-25",
+   "time": "10:00",
+   "timeLabel": "10  bis  14 Uhr",
+   "venue": "El Tesoro",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Food & Drinks",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/genuss_lateinamerikanische_gastronomie-1",
+   "lat": 49.011481,
+   "lng": 8.359125,
+   "geoExact": true
   }
  ]
 }
