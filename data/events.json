@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-15T08:23:43+02:00",
+ "updated": "2026-09-15T14:22:01+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 362,
+ "count": 369,
  "events": [
   {
    "id": "ka-576950",
@@ -689,6 +689,24 @@
    "geoExact": false
   },
   {
+   "id": "ka-585015",
+   "source": "Stadt Karlsruhe",
+   "title": "Boiling Voices – der Schrei-Chor",
+   "description": "Wie klingt weibliche Wut? Schreien als rhythmische und melodische Stimmform.",
+   "date": "2026-09-16",
+   "time": "19:00",
+   "timeLabel": "19 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/boiling_voices_der_schrei_chor",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-584881",
    "source": "Stadt Karlsruhe",
    "title": "ABBA Gold - Dancing Queen am Hotdog-Stand",
@@ -1337,6 +1355,24 @@
    "geoExact": true
   },
   {
+   "id": "ka-585021",
+   "source": "Stadt Karlsruhe",
+   "title": "Park(ing) Day - Städte für Menschen!",
+   "description": "Am Freitag, dem 18.09.2026 ist es wieder soweit. 🌿 Zum internationalen Park(ing) Day werden öffentliche Parkplätze für einen Tag zu kleinen, grünen, belebten Inseln mitten in der Stadt.",
+   "date": "2026-09-18",
+   "time": "14:00",
+   "timeLabel": "14  bis  18 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/parking_day_stadte_fur_menschen",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-584826",
    "source": "Stadt Karlsruhe",
    "title": "Captain Schnuppes Weltraumreise",
@@ -1375,7 +1411,7 @@
   {
    "id": "ka-580163",
    "source": "Stadt Karlsruhe",
-   "title": "WORKSHOP: Comics zeichnen mit dem KIT Klimamonster",
+   "title": "WORKSHOP: Comics zeichnen mit dem KIT Klimamonster -- ENTFÄLLT --",
    "description": "Kostenfrei, mit Anmeldung | ab 6 Jahren",
    "date": "2026-09-18",
    "time": "15:00",
@@ -1385,7 +1421,7 @@
    "country": "Deutschland",
    "category": "Kultur",
    "price": 0,
-   "url": "https://kalender.karlsruhe.de/db/termine/literatur/workshop_comics_zeichnen_mit_dem_kit_klimamonster-1",
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/workshop_comics_zeichnen_mit_dem_kit",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
@@ -2055,6 +2091,24 @@
    "lat": 49.00788,
    "lng": 8.400757,
    "geoExact": true
+  },
+  {
+   "id": "ka-585038",
+   "source": "Stadt Karlsruhe",
+   "title": "Klimafestival",
+   "description": "Gemeinsam feiern, entdecken & aktiv werden",
+   "date": "2026-09-19",
+   "time": "12:00",
+   "timeLabel": "12  bis  23 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/klimafestival",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   },
   {
    "id": "ka-584076",
@@ -3533,6 +3587,24 @@
    "geoExact": false
   },
   {
+   "id": "ka-585024",
+   "source": "Stadt Karlsruhe",
+   "title": "Theaterlabor für alle",
+   "description": "Im Theater-Labor mit Iba geht es um dich – deinen Körper, deine Stimme und deinen Ausdruck.",
+   "date": "2026-09-22",
+   "time": "18:00",
+   "timeLabel": "18  bis  19.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/theaterlabor_fur_alle-8",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-584210",
    "source": "Stadt Karlsruhe",
    "title": "Green Agentic AI Coding mit Ponytail",
@@ -4291,8 +4363,8 @@
   {
    "id": "ka-584143",
    "source": "Stadt Karlsruhe",
-   "title": "Tanz-Flow",
-   "description": "Dein Donnerstag-Dance: Viben, grooven, fließen in Community",
+   "title": "Tanzen mit Erika",
+   "description": "Dein Donnerstag-Dance: Bewegen in Community",
    "date": "2026-09-24",
    "time": "18:00",
    "timeLabel": "18  bis  20 Uhr",
@@ -4301,7 +4373,7 @@
    "country": "Deutschland",
    "category": "Kultur",
    "price": null,
-   "url": "https://kalender.karlsruhe.de/db/termine/theater/tanz_flow-5",
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/tanzen_mit_erika",
    "lat": 49.009085,
    "lng": 8.412493,
    "geoExact": true
@@ -5855,6 +5927,24 @@
    "geoExact": true
   },
   {
+   "id": "ka-585056",
+   "source": "Stadt Karlsruhe",
+   "title": "Schlossgarten-Gelächter Karlsruhe",
+   "description": "Eine Stunde Lachen, Bewegung, Spiel, Spaß und Entspannung",
+   "date": "2026-09-27",
+   "time": "11:00",
+   "timeLabel": "11  bis  12 Uhr",
+   "venue": "Schlossgarten  Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/schlossgarten_gelachter_karlsruhe-6",
+   "lat": 49.017572,
+   "lng": 8.404892,
+   "geoExact": true
+  },
+  {
    "id": "ka-584852",
    "source": "Stadt Karlsruhe",
    "title": "NEU: Fritz Fliege fliegt ins Weltall",
@@ -6516,6 +6606,42 @@
    "category": "Vortrag",
    "price": null,
    "url": "https://kalender.karlsruhe.de/db/termine/wirtschaft/labs_talk_about-3",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-577266",
+   "source": "Stadt Karlsruhe",
+   "title": "Salotto culturale",
+   "description": "Für die, die schon Italienisch sprechen. / Per chi già parla italiano.",
+   "date": "2026-09-29",
+   "time": "10:00",
+   "timeLabel": "10  bis  12 Uhr",
+   "venue": "Centro = Schul- und Kulturzentrum der Deutsch-Italienischen Gesellschaft e.V. Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/salotto_culturale-18",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-576521",
+   "source": "Stadt Karlsruhe",
+   "title": "Sprechstunde: Einfach digital!",
+   "description": "Jeden Dienstag, ohne Anmeldung, kostenfrei",
+   "date": "2026-09-29",
+   "time": "10:00",
+   "timeLabel": "10  bis  12 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Vortrag",
+   "price": 0,
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/sprechstunde_einfach_digital-51",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
