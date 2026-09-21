@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-21T08:24:27+02:00",
+ "updated": "2026-09-21T14:20:40+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 341,
+ "count": 345,
  "events": [
   {
    "id": "ka-584996",
@@ -666,6 +666,24 @@
    "category": "Party / Club",
    "price": null,
    "url": "https://kalender.karlsruhe.de/db/termine/musik/fear_factory",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-585158",
+   "source": "Stadt Karlsruhe",
+   "title": "Wo stehen wir? Gesellschaft in der Polykrise",
+   "description": "Akademie der älteren Generation",
+   "date": "2026-09-21",
+   "time": "16:00",
+   "timeLabel": "16  bis  17.30 Uhr",
+   "venue": "Erlöserkirche der Evangelischen methodistischen Kirche",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/wo_stehen_wir_gesellschaft_in_der_polykrise",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
@@ -1875,6 +1893,24 @@
    "lat": 49.0113,
    "lng": 8.386998,
    "geoExact": true
+  },
+  {
+   "id": "ka-585164",
+   "source": "Stadt Karlsruhe",
+   "title": "Tanzmeditation mit Ursula Weber",
+   "description": "\"Shalom\". Tanzen für den Frieden",
+   "date": "2026-09-24",
+   "time": "19:00",
+   "timeLabel": "19  bis  20.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/tanzmeditation_mit_ursula_weber",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   },
   {
    "id": "ka-583553",
@@ -4973,6 +5009,24 @@
    "geoExact": false
   },
   {
+   "id": "ka-585254",
+   "source": "Stadt Karlsruhe",
+   "title": "SchönFERBERei",
+   "description": "Lieder und Lesung mit Jürgen Ferber",
+   "date": "2026-10-01",
+   "time": "19:30",
+   "timeLabel": "19.30 Uhr",
+   "venue": "OrgelFabrikSalon",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/schonferberei",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-584779",
    "source": "Stadt Karlsruhe",
    "title": "Da sam ja neko / Wenn ich ein jemand wäre 2026",
@@ -6033,6 +6087,24 @@
    "lat": 49.044618,
    "lng": 8.383048,
    "geoExact": true
+  },
+  {
+   "id": "ka-585189",
+   "source": "Stadt Karlsruhe",
+   "title": "Konzert",
+   "description": "Orchestra Carolina",
+   "date": "2026-10-04",
+   "time": "18:00",
+   "timeLabel": "18  bis  19.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/konzert-8",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   },
   {
    "id": "ka-584658",
