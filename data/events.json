@@ -1,8 +1,8 @@
 {
- "updated": "2026-09-24T08:22:14+02:00",
+ "updated": "2026-09-24T14:21:59+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 348,
+ "count": 351,
  "events": [
   {
    "id": "ka-585162",
@@ -6267,6 +6267,60 @@
    "lat": 48.980865,
    "lng": 8.330417,
    "geoExact": true
+  },
+  {
+   "id": "ka-584985",
+   "source": "Stadt Karlsruhe",
+   "title": "Vom Vorurteil zur Gewalt",
+   "description": "Motive und Formen der Ausgrenzung",
+   "date": "2026-10-08",
+   "time": "10:00",
+   "timeLabel": "10  bis  11.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/vom_vorurteil_zur_gewalt",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-584349",
+   "source": "Stadt Karlsruhe",
+   "title": "Peter und der Wolf (ab 4)",
+   "description": "Ein musikalisches Märchen mit der Originalmusik von Sergej Prokofiew",
+   "date": "2026-10-08",
+   "time": "10:00",
+   "timeLabel": "10  bis  10.45 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/peter_und_der_wolf_ab4n",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-585067",
+   "source": "Stadt Karlsruhe",
+   "title": "Doing Citizen Science TOGETHER – Hybrid Networking EventCitizen Science MeetUp",
+   "description": "Gemeinsam forscht es sich besser – und Citizen Science ist dafür ein gutes Beispiel.",
+   "date": "2026-10-08",
+   "time": "14:00",
+   "timeLabel": "14  bis  16 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Vortrag",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/wirtschaft/doing_citizen_science_together_hybrid",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   }
  ]
 }
