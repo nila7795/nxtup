@@ -1,4 +1,8 @@
 {
+ "albert -schweitzer-saal": [
+  49.011386,
+  8.388364
+ ],
  "anne-frank-haus": [
   49.015076,
   8.393013
@@ -109,6 +113,10 @@
  "karlsruhe": [
   52.914649,
   12.187641
+ ],
+ "karlsruhe innenstadt": [
+  49.006637,
+  8.412335
  ],
  "karlsruher oststadt": [
   49.015335,
@@ -228,6 +236,10 @@
   48.99516,
   8.402252
  ],
+ "schlossplatz": [
+  49.012221,
+  8.40416
+ ],
  "schlossplatz - karl-friedrich-denkmal": null,
  "schwarzwaldhalle / kongresszentrum karlsruhe": null,
  "staatliches museum für naturkunde karlsruhe": [
@@ -270,6 +282,10 @@
  ],
  "vhs karlsruhe, ulrich-bernays-saal": null,
  "vor der christuskirche am mühlburger tor": null,
+ "waldklassenzimmer": [
+  49.028617,
+  8.408869
+ ],
  "waldstadtzentrum": [
   49.035165,
   8.444473
