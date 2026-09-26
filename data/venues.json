@@ -54,6 +54,10 @@
  "ev. stadtkirche am marktplatz karlsruhe": null,
  "ev. stadtkirche karlsruhe": null,
  "evangelische kirche karlsruhe-grötzingen": null,
+ "evangelische stadtkirche durlach": [
+  48.998859,
+  8.471353
+ ],
  "festplatz \"ponderosa\"": [
   48.977182,
   8.44863
@@ -177,6 +181,10 @@
  "marktplatz karlsruhe": [
   49.008948,
   8.403879
+ ],
+ "markuskirche": [
+  49.006967,
+  8.372087
  ],
  "messe karlsruhe": [
   48.980865,
