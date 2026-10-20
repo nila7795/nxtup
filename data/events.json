@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-20T13:21:35+02:00",
+ "updated": "2026-10-20T18:46:28+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 399,
+ "count": 404,
  "events": [
   {
    "id": "ka-585280",
@@ -4795,7 +4795,7 @@
   {
    "id": "ka-583682",
    "source": "Stadt Karlsruhe",
-   "title": "Halloweenparty",
+   "title": "Halloweenparty -- AUSGEBUCHT --",
    "description": "Kostenfrei, mit Anmeldung",
    "date": "2026-10-28",
    "time": "16:30",
@@ -4805,7 +4805,7 @@
    "country": "Deutschland",
    "category": "Kultur",
    "price": 0,
-   "url": "https://kalender.karlsruhe.de/db/termine/literatur/halloweenparty",
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/halloweenparty_ausgebucht_",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
@@ -6323,6 +6323,24 @@
    "geoExact": false
   },
   {
+   "id": "ka-586696",
+   "source": "Stadt Karlsruhe",
+   "title": "Dark Matter Day 2026",
+   "description": "Hier wird Wissenschaft lebendig und die Suche nach der Dunklen Materie für alle erlebbar",
+   "date": "2026-10-31",
+   "time": "15:00",
+   "timeLabel": "15  bis  17 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Vortrag",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/wirtschaft/dark_matter_day2026n",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
    "id": "ka-586458",
    "source": "Stadt Karlsruhe",
    "title": "Musik & Kosmos: \"Stars of Classic\"",
@@ -7185,6 +7203,78 @@
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
+  },
+  {
+   "id": "ka-586442",
+   "source": "Stadt Karlsruhe",
+   "title": "Buchclub „Über den Buchrand hinaus“",
+   "description": "Jeden ersten Dienstag im Monat, von 17 bis 18:15 Uhr | kostenfrei, ohne Anmeldung",
+   "date": "2026-11-03",
+   "time": "17:00",
+   "timeLabel": "17  bis  18.15 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": 0,
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/buchclub_uber_den_buchrand_hinaus",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-585027",
+   "source": "Stadt Karlsruhe",
+   "title": "Theaterlabor für alle",
+   "description": "Im Theater-Labor mit Iba geht es um dich – deinen Körper, deine Stimme und deinen Ausdruck.",
+   "date": "2026-11-03",
+   "time": "18:00",
+   "timeLabel": "18  bis  19.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/theaterlabor_fur_alle-11",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-577972",
+   "source": "Stadt Karlsruhe",
+   "title": "Checkpoint Karlsruhe | 03.11.2026",
+   "description": "Test auf HIV & STI",
+   "date": "2026-11-03",
+   "time": "18:30",
+   "timeLabel": "18.30  bis  20 Uhr",
+   "venue": "ZeSIA - Zentrum für sexuelle Gesundheit, Identität und Aufklärung Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/checkpoint_karlsruhe03112026n",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-576891",
+   "source": "Stadt Karlsruhe",
+   "title": "Vortrag: Im Dunkel der Unterwasserhöhlen des Yucatans – auf den Spuren der nächsten Verwandten der Insekten",
+   "description": "Vortrag von Dr. habil Bjön von Reumont",
+   "date": "2026-11-03",
+   "time": "18:30",
+   "timeLabel": "18.30 Uhr",
+   "venue": "Staatliches Museum für Naturkunde Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/ausstellungen/vortrag_im_dunkel_der_unterwasserhohlen",
+   "lat": 49.006985,
+   "lng": 8.400144,
+   "geoExact": true
   }
  ]
 }
