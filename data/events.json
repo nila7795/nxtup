@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-20T18:46:28+02:00",
+ "updated": "2026-10-20T23:29:36+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 404,
+ "count": 406,
  "events": [
   {
    "id": "ka-585280",
@@ -7275,6 +7275,42 @@
    "lat": 49.006985,
    "lng": 8.400144,
    "geoExact": true
+  },
+  {
+   "id": "ka-584529",
+   "source": "Stadt Karlsruhe",
+   "title": "Brand und Katastrophe – Zündeln und Löschen in Baden 1700–1900",
+   "description": "Ausstellungseröffnung",
+   "date": "2026-11-03",
+   "time": "19:00",
+   "timeLabel": "19 Uhr",
+   "venue": "Badische Landesbibliothek",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/ausstellungen/brand_und_katastrophe_zundeln_und_loschen-1",
+   "lat": 49.007798,
+   "lng": 8.398882,
+   "geoExact": true
+  },
+  {
+   "id": "ka-584876",
+   "source": "Stadt Karlsruhe",
+   "title": "Sicher vernetzt, gemeinsam geschützt – Kinderschutz im digitalen Vereinsalltag",
+   "description": "Online-Veranstaltung vom Kinderbüro der Stadt Karlsruhe",
+   "date": "2026-11-03",
+   "time": "20:00",
+   "timeLabel": "20  bis  21 Uhr",
+   "venue": "Online Veranstaltung",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/sicher_vernetzt_gemeinsam_geschutzt",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   }
  ]
 }
