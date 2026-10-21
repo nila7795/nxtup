@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-21T19:02:58+02:00",
+ "updated": "2026-10-21T23:31:30+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 406,
+ "count": 409,
  "events": [
   {
    "id": "ka-585497",
@@ -7310,6 +7310,60 @@
    "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/greenpeace_2026_markus_mauthe",
    "lat": 49.004425,
    "lng": 8.431709,
+   "geoExact": true
+  },
+  {
+   "id": "ka-586363",
+   "source": "Stadt Karlsruhe",
+   "title": "Musikkabarett BosArt Trio . Abschiedskonzert .",
+   "description": "Hans Hachmann (Gesang & Texte) . Wolfgang Schäfer (Gesang) . Reinhard Buhrow (Klavier)",
+   "date": "2026-11-04",
+   "time": "19:30",
+   "timeLabel": "19.30  bis  22 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/musikkabarett_bosart_trio_abschiedskonzert",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-584908",
+   "source": "Stadt Karlsruhe",
+   "title": "ABBA Waterloo im Bällebad",
+   "description": "Musikalische Komödie um große Hits und schöne Möbel",
+   "date": "2026-11-04",
+   "time": "19:30",
+   "timeLabel": "19.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/theater/abba_waterloo_im_ballebad-14",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-576900",
+   "source": "Stadt Karlsruhe",
+   "title": "Mit Rilke durch das Jahr: „Ich finde dich in allen Dingen“",
+   "description": "Rilke und der liebe Gott - Musik und Wort im Rahmen der Woche der Stille",
+   "date": "2026-11-04",
+   "time": "19:30",
+   "timeLabel": "19.30 Uhr",
+   "venue": "Kleine Kirche Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/mit_rilke_durch_das_jahr_ich_finde_dich_in_allen_dingen",
+   "lat": 49.00924,
+   "lng": 8.405309,
    "geoExact": true
   }
  ]
