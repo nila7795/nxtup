@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-22T19:01:59+02:00",
+ "updated": "2026-10-22T23:26:39+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 415,
+ "count": 417,
  "events": [
   {
    "id": "ka-579799",
@@ -7470,6 +7470,42 @@
    "category": "Vortrag",
    "price": null,
    "url": "https://kalender.karlsruhe.de/db/termine/wirtschaft/denkmahl_skeptix_ka-8",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-583028",
+   "source": "Stadt Karlsruhe",
+   "title": "STOPPOK",
+   "description": "\"RUND-Reise – die Band-Tour 2026\"",
+   "date": "2026-11-05",
+   "time": "20:00",
+   "timeLabel": "20 Uhr",
+   "venue": "Kulturzentrum Tollhaus",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/stoppok",
+   "lat": 49.004425,
+   "lng": 8.431709,
+   "geoExact": true
+  },
+  {
+   "id": "ka-581720",
+   "source": "Stadt Karlsruhe",
+   "title": "Die Sterne",
+   "description": "WENN ES LIEBE IST Tour 2026 in Kooperation mit dem KOHI Präsentiert von Musikexpress, ByteFM, BANDUP, Laut.de, Kaput Mag",
+   "date": "2026-11-05",
+   "time": "20:30",
+   "timeLabel": "20.30  bis  22.30 Uhr",
+   "venue": "Jubez - Stadtjugendausschuss e.V. Karlsruhe",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Konzert",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/musik/die_sterne",
    "lat": 49.0069,
    "lng": 8.4037,
    "geoExact": false
