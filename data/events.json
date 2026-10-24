@@ -1,8 +1,8 @@
 {
- "updated": "2026-10-24T12:45:02+02:00",
+ "updated": "2026-10-24T17:47:25+02:00",
  "source": "Veranstaltungskalender der Stadt Karlsruhe (CC0)",
  "sourceUrl": "https://kalender.karlsruhe.de/db/termine/rss",
- "count": 394,
+ "count": 397,
  "events": [
   {
    "id": "ka-584555",
@@ -7095,6 +7095,60 @@
    "lat": 49.006985,
    "lng": 8.400144,
    "geoExact": true
+  },
+  {
+   "id": "ka-586623",
+   "source": "Stadt Karlsruhe",
+   "title": "Der Karlsruher Hauptfriedhof - Grabmale und ihre Symbolik",
+   "description": "Stadtführung",
+   "date": "2026-11-07",
+   "time": "14:00",
+   "timeLabel": "14  bis  16 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/der_karlsruher_hauptfriedhof_grabmale_und_ihre_symbolik-1",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
+  },
+  {
+   "id": "ka-584532",
+   "source": "Stadt Karlsruhe",
+   "title": "Entdeckungsreise durch das Büchermagazin",
+   "description": "Mit Dr. Volker Wittenauer",
+   "date": "2026-11-07",
+   "time": "14:00",
+   "timeLabel": "14 Uhr",
+   "venue": "Badische Landesbibliothek",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Kultur",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/literatur/entdeckungsreise_durch_das_buchermagazin-1",
+   "lat": 49.007798,
+   "lng": 8.398882,
+   "geoExact": true
+  },
+  {
+   "id": "ka-586309",
+   "source": "Stadt Karlsruhe",
+   "title": "Auf den Spuren des Kolonialismus in Karlsruhe",
+   "description": "Stadtführung zum Thema Deutsche Kolonialgeschichte",
+   "date": "2026-11-07",
+   "time": "15:00",
+   "timeLabel": "15  bis  17.30 Uhr",
+   "venue": "",
+   "city": "Karlsruhe",
+   "country": "Deutschland",
+   "category": "Stadtfest",
+   "price": null,
+   "url": "https://kalender.karlsruhe.de/db/termine/stadtleben/auf_den_spuren_des_kolonialismus_in_karlsruhe-7",
+   "lat": 49.0069,
+   "lng": 8.4037,
+   "geoExact": false
   }
  ]
 }
