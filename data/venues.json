@@ -38,6 +38,7 @@
   49.044618,
   8.383048
  ],
+ "bahnhofstraße, ecke bahnhofplatz": null,
  "bbk künstlerhaus": [
   49.007938,
   8.414071
@@ -50,7 +51,13 @@
   49.007092,
   8.495133
  ],
+ "bildungszentrum roncalli-forum karlsruhe, ignatius-saal": null,
+ "brunhilde-baur-haus": [
+  49.04565,
+  8.390671
+ ],
  "bürgersaal rathaus durlach": null,
+ "bürgerzentrum daxlanden im caritas-seniorenzentrum st. valentin": null,
  "bürgerzentrum mühlburg": [
   49.009939,
   8.360424
@@ -61,10 +68,15 @@
  ],
  "café nun": null,
  "centro = schul- und kulturzentrum der deutsch-italienischen gesellschaft e.v. karlsruhe": null,
+ "christ-könig-kirche": [
+  49.003584,
+  8.523729
+ ],
  "christuskirche karlsruhe": [
   49.0113,
   8.386998
  ],
+ "city tour durch karlsruhe": null,
  "das sandkorn theater & mehr": null,
  "die stadtmitte": [
   49.004029,
@@ -151,10 +163,12 @@
   49.013145,
   8.382802
  ],
+ "gerthsen-hörsaal, engesserstr. 9, kit karlsruhe, campus süd": null,
  "gottesauer platz": [
   49.007314,
   8.423628
  ],
+ "gutenbergplatz, am krautkopfbrunnen": null,
  "günther-klotz-anlage": [
   48.999037,
   8.372969
@@ -173,6 +187,7 @@
   49.009274,
   8.37477
  ],
+ "hemingway lounge in karlsruhe": null,
  "hochschule für musik": [
   49.004568,
   8.426555
@@ -181,6 +196,7 @@
  "hochschule für musik karlsruhe, campusone, wolfgang-rihm-forum": null,
  "hochschule für musik, genuit-saal": null,
  "hochschule für musik, velte-saal": null,
+ "ibz (internationales begegnungszentrum), kaiserallee 12 d, karlsruhe": null,
  "ihk haus der wirtschaft": [
   49.007471,
   8.402525
@@ -189,6 +205,7 @@
  "inline skate-platz europahalle": null,
  "internationales begegnungszentrum karlsruhe e.v. (ibz)": null,
  "jakobus-theater im theaterhaus karlsruhe": null,
+ "jazz‐club": null,
  "johanniskirche am werderplatz": null,
  "joseph-keilberth-saal, wohnstift rüppurr": null,
  "jubez - jugend- und begegnungszentrum": null,
@@ -197,6 +214,7 @@
  "jüdische kultusgemeinde karlsruhe k.d.ö.r.": null,
  "k.punkt - informationspavillon k.": null,
  "kabarett in der orgelfabrik - die spiegelfechter": null,
+ "kaiserstraße 47, kulturküche": null,
  "kammertheater karlsruhe": [
   49.008982,
   8.398235
@@ -290,6 +308,7 @@
   49.008113,
   8.423514
  ],
+ "lutherkirche (am gottesauer platz)": null,
  "luthersaal karlsruhe": [
   48.913291,
   8.509142
@@ -357,6 +376,7 @@
   8.394758
  ],
  "pädagogische hochschule karlsruhe (phka)": null,
+ "rathaus grötzingen, bürgersaal": null,
  "rathausplatz grötzingen": [
   49.007343,
   8.495875
@@ -407,6 +427,7 @@
   49.006985,
   8.400144
  ],
+ "staatstheater, siehe beschreibung": null,
  "stadtarchiv karlsruhe": [
   49.007309,
   8.40908
@@ -414,9 +435,12 @@
  "stadtbibliothek karlsruhe - amerikanische bibliothek": null,
  "stadtbibliothek karlsruhe - kinder- und jugendbibliothek karlsruhe im prinz-max-palais": null,
  "stadtbibliothek karlsruhe - stadtteilbibliothek durlach": null,
+ "stadtbibliothek karlsruhe - stadtteilbibliothek grötzingen": null,
  "stadtbibliothek karlsruhe - stadtteilbibliothek mühlburg": null,
  "stadtbibliothek karlsruhe - stadtteilbibliothek neureut": null,
  "stadtbibliothek karlsruhe - stadtteilbibliothek waldstadt": null,
+ "stadtbibliothek karlsruhe - zentralbibliothek im neuen ständehaus": null,
+ "stadthalle / kongresszentrum karlsruhe": null,
  "stadtkirche durlach": [
   48.998859,
   8.471353
@@ -432,11 +456,16 @@
   8.383493
  ],
  "substage karlsruhe e.v.": null,
+ "tanzsportzentrum des tsc rot-weiss karlsruhe e.v.": null,
  "tollhaus karlsruhe": [
   49.004425,
   8.431709
  ],
  "tourist-information am marktplatz": null,
+ "triangel transfer | kultur | raum": [
+  49.009193,
+  8.408857
+ ],
  "trinitatiskirche durlach-aue": [
   48.988214,
   8.460867
@@ -451,6 +480,7 @@
   49.011287,
   8.37594
  ],
+ "vhs karlsruhe, kaiserallee 12e, hofgebäude": null,
  "vhs karlsruhe, ulrich-bernays-saal": null,
  "vor der christuskirche am mühlburger tor": null,
  "waldklassenzimmer": [
